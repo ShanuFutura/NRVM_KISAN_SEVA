@@ -38,7 +38,7 @@ class FarmersDrawer extends StatelessWidget {
             title: Text('View available machines'),
             trailing: Icon(Icons.precision_manufacturing),
             onTap: () {
-              // Navigator.of(context).pushNamed(EmployeesListScreen.routeName);
+              //  Navigator.of(context).pushNamed(EmployeesListScreen.routeName);
               Navigator.of(context).pop();
             },
           ),
@@ -47,7 +47,6 @@ class FarmersDrawer extends StatelessWidget {
             title: Text('view fertilizers'),
             trailing: Icon(Icons.grass),
             onTap: () {
-              // Navigator.of(context).pushNamed(OfficerAttendanceView.routeName);
               Navigator.of(context).pop();
             },
           ),
