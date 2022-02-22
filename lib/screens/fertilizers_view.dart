@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FertilizersView extends StatelessWidget {
-  static const String routeName = 'cropview';
+  static const String routeName = 'ferti';
 
   @override
   Widget build(BuildContext context) {

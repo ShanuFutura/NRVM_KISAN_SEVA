@@ -17,12 +17,23 @@ class HomePage extends StatelessWidget {
     final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: FarmersDrawer(),
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Farmers App'),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Crops',
+              style: TextStyle(
+                  fontSize: 25, color: Theme.of(context).primaryColor),
+            ),
+          ),
           Container(
-            height: deviceHeight * .7,
+            height: deviceHeight * .65,
             child: ListView.builder(
                 itemCount: 20,
                 itemBuilder: (context, index) {

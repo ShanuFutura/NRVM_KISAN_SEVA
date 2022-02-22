@@ -1,3 +1,4 @@
+import 'package:farmers_app/screens/admin_notifications.dart';
 import 'package:farmers_app/screens/crop_view.dart';
 import 'package:farmers_app/screens/faq_list.dart';
 import 'package:farmers_app/screens/fertilizers_list_screen.dart';
@@ -29,6 +30,7 @@ class MainClass extends StatelessWidget {
         FertilizersView.routeName: (context) => FertilizersView(),
         MachinesView.routeName: (context) => MachinesView(),
         FAQList.routeName: (context) => FAQList(),
+        AdminNotifications.routeName: (context) => AdminNotifications(),
       },
     );
   }

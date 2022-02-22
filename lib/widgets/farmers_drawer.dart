@@ -1,3 +1,7 @@
+import 'package:farmers_app/screens/admin_notifications.dart';
+import 'package:farmers_app/screens/faq_list.dart';
+import 'package:farmers_app/screens/fertilizers_list_screen.dart';
+import 'package:farmers_app/screens/machinary_list_screen.dart';
 import 'package:farmers_app/screens/profile_edit_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -38,8 +42,8 @@ class FarmersDrawer extends StatelessWidget {
             title: Text('View available machines'),
             trailing: Icon(Icons.precision_manufacturing),
             onTap: () {
-              //  Navigator.of(context).pushNamed(EmployeesListScreen.routeName);
               Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(MachinaryListScreen.routeName);
             },
           ),
           Divider(),
@@ -48,15 +52,16 @@ class FarmersDrawer extends StatelessWidget {
             trailing: Icon(Icons.grass),
             onTap: () {
               Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(FertilizersListScreen.routeName);
             },
           ),
           Divider(),
           ListTile(
-            title: Text('Admin notificatio'),
+            title: Text('Admin notifications'),
             trailing: Icon(Icons.notifications),
             onTap: () {
-              // Navigator.of(context).pushNamed(ParolList.routeName);
               Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(AdminNotifications.routeName);
             },
           ),
           Divider(),
@@ -64,8 +69,8 @@ class FarmersDrawer extends StatelessWidget {
             title: Text('contact support team'),
             trailing: Icon(Icons.support_agent),
             onTap: () {
-              // Navigator.of(context).pushNamed(FeedBackScreen.routeName);
               Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(FAQList.routeName);
             },
           ),
           Divider(),
