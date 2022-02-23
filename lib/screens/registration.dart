@@ -22,7 +22,7 @@ class _RegistrationState extends State<Registration> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
-              height: deviceHeight * .3,
+              height: isLogin ? deviceHeight * .3 : deviceHeight * .5,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -35,7 +35,11 @@ class _RegistrationState extends State<Registration> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 2, horizontal: 15),
-                      child: TextFormField(),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          label: Text('username'),
+                        ),
+                      ),
                     ),
                   ),
                   if (!isLogin)
@@ -48,7 +52,49 @@ class _RegistrationState extends State<Registration> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 2, horizontal: 15),
-                        child: TextFormField(),
+                        child: TextFormField(
+                          keyboardType: TextInputType.name,
+                          textCapitalization: TextCapitalization.words,
+                          decoration: InputDecoration(
+                            label: Text('name'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (!isLogin)
+                    Container(
+                      height: 40,
+                      width: deviceWidth * .8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color.fromARGB(51, 0, 87, 29)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 15),
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            label: Text('email'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (!isLogin)
+                    Container(
+                      height: 40,
+                      width: deviceWidth * .8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color.fromARGB(51, 0, 87, 29)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 15),
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            label: Text('phone'),
+                          ),
+                        ),
                       ),
                     ),
                   Container(
@@ -60,7 +106,12 @@ class _RegistrationState extends State<Registration> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 2, horizontal: 15),
-                      child: TextFormField(),
+                      child: TextFormField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          label: Text('password'),
+                        ),
+                      ),
                     ),
                   ),
                 ],
