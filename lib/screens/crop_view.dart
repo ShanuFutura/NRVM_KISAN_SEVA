@@ -1,4 +1,7 @@
+import 'package:farmers_app/models/dummies.dart';
+import 'package:farmers_app/providers/http_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CropView extends StatelessWidget {
   static const String routeName = 'cropview';
@@ -6,6 +9,9 @@ class CropView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
+    final cropId = ModalRoute.of(context)!.settings.arguments;
+    final cropData = (Provider.of<HttpProviders>(context).cropsList as List)
+        .firstWhere((element) => element['crop_id'] == cropId);
 
     return Scaffold(
       body: CustomScrollView(slivers: [
@@ -14,7 +20,7 @@ class CropView extends StatelessWidget {
           expandedHeight: 300,
           flexibleSpace: FlexibleSpaceBar(
             title: Text(
-              'Crop name',
+              (cropData as Map)['crop'],
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             background: Stack(
@@ -22,10 +28,9 @@ class CropView extends StatelessWidget {
               children: [
                 Container(
                   height: 301,
-                  child: Image.asset(
-                    'assets/crop.jpg',
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.network(Dummies.rootUrlforImages +
+                      'Images/' +
+                      (cropData)['image']),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10),
@@ -46,7 +51,7 @@ class CropView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      'Title',
+                      'Details',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -54,7 +59,7 @@ class CropView extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: deviceWidth * .2),
                       child: Text(
-                        'Season:season',
+                        'Season: ' + (cropData as Map)['season'],
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
@@ -62,8 +67,7 @@ class CropView extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+              Text((cropData as Map)['description'])
             ],
           ),
         )),

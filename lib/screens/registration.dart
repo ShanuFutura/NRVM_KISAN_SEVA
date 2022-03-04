@@ -25,7 +25,7 @@ class _RegistrationState extends State<Registration> {
   bool isLoading = false;
 
   trySubmit() async {
-    if (true) {
+    if (fkey.currentState!.validate()) {
       setState(() {
         isLoading = true;
       });

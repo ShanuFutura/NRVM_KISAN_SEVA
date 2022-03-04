@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
 class HttpProviders extends ChangeNotifier {
+  var cropsList;
+
   Future<bool> farmerLogin(String username, String password) async {
     final res = await post(Uri.parse(Dummies.rootUrl + 'login.php'),
         body: {'username': username, 'password': password});
@@ -14,8 +16,10 @@ class HttpProviders extends ChangeNotifier {
   }
 
   Future<dynamic> getCrops() async {
-    final res = await get(Uri.parse(Dummies.rootUrl + 'login.php'));
+    
+    final res = await get(Uri.parse(Dummies.rootUrl + 'crop_list.php'));
     print('crops list' + res.body);
+    cropsList = jsonDecode(res.body);
     return jsonDecode(res.body);
   }
 }
