@@ -1,4 +1,7 @@
 class Dummies {
+
+static const String rootUrl='http://192.168.29.78/farmer/API/';
+
   static final cropsList = [];
 
   static final faqList = [
