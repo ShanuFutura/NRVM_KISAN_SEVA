@@ -8,6 +8,7 @@ import 'package:farmers_app/screens/home_page.dart';
 import 'package:farmers_app/screens/loading_screen.dart';
 import 'package:farmers_app/screens/machinary_list_screen.dart';
 import 'package:farmers_app/screens/machines_view.dart';
+import 'package:farmers_app/screens/pesticides_list.dart';
 import 'package:farmers_app/screens/profile_edit_screen.dart';
 import 'package:farmers_app/screens/registration.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,10 @@ class MainClass extends StatelessWidget {
     return ChangeNotifierProvider(
       create: ((context) => HttpProviders()),
       child: MaterialApp(
-        theme: ThemeData(primarySwatch: Colors.green),
+        theme: ThemeData(
+          
+            androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
+            primarySwatch: Colors.green),
         home: FutureBuilder(
           future: rememberUser(),
           builder: (context, snap) {
@@ -58,6 +62,7 @@ class MainClass extends StatelessWidget {
           MachinesView.routeName: (context) => MachinesView(),
           FAQList.routeName: (context) => FAQList(),
           AdminNotifications.routeName: (context) => AdminNotifications(),
+          PesticidesList.routeName: (context) => PesticidesList(),
         },
       ),
     );

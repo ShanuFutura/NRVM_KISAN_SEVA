@@ -1,8 +1,13 @@
+// import 'dart:html';
+import 'dart:io';
+
 import 'package:farmers_app/screens/admin_notifications.dart';
 import 'package:farmers_app/screens/faq_list.dart';
 import 'package:farmers_app/screens/fertilizers_list_screen.dart';
 import 'package:farmers_app/screens/machinary_list_screen.dart';
+import 'package:farmers_app/screens/pesticides_list.dart';
 import 'package:farmers_app/screens/profile_edit_screen.dart';
+import 'package:farmers_app/screens/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -76,13 +81,24 @@ class FarmersDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
+            title: Text('pesticides'),
+            trailing: Icon(Icons.sanitizer),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(PesticidesList.routeName);
+            },
+          ),
+          Divider(),
+          ListTile(
             title: Text('Logout'),
-            trailing: Icon(Icons.support_agent),
+            trailing: Icon(Icons.logout),
             onTap: () async {
               Navigator.of(context).pop();
               final pref = await SharedPreferences.getInstance();
               pref.setBool('isLogged', false);
-              
+              pref.remove('farmerId');
+              Navigator.of(context)
+                  .pushReplacementNamed(Registration.routeName);
             },
           ),
           Divider(),

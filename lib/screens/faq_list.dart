@@ -1,5 +1,7 @@
 import 'package:farmers_app/models/dummies.dart';
+import 'package:farmers_app/providers/http_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FAQList extends StatefulWidget {
   const FAQList({Key? key}) : super(key: key);
@@ -42,6 +44,8 @@ class _FAQListState extends State<FAQList> {
             ? null
             : () {
                 setState(() {
+                  Provider.of<HttpProviders>(context, listen: false)
+                      .sendFAQ(faqController.text);
                   faquestion = '';
                   faqController.clear();
                   FocusScope.of(context).unfocus();

@@ -37,6 +37,12 @@ class _RegistrationState extends State<Registration> {
         setState(() {
           isLoading = false;
         });
+      } else {
+        succeed= await Provider.of<HttpProviders>(context,listen:  false)
+            .farmersRegister(name, email, phone, username, password);
+        setState(() {
+          isLoading = false;
+        });
       }
       if (succeed) {
         final pref = await SharedPreferences.getInstance();
@@ -88,6 +94,7 @@ class _RegistrationState extends State<Registration> {
                     ),
                     if (!isLogin)
                       Container(
+                        key: Key('name'),
                         height: 40,
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
@@ -115,6 +122,7 @@ class _RegistrationState extends State<Registration> {
                       ),
                     if (!isLogin)
                       Container(
+                        key: Key('mail'),
                         height: 40,
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
@@ -143,6 +151,7 @@ class _RegistrationState extends State<Registration> {
                       ),
                     if (!isLogin)
                       Container(
+                        key: Key('phone'),
                         height: 40,
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
@@ -170,6 +179,7 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                     Container(
+                      key: Key('pass'),
                       height: 40,
                       width: deviceWidth * .8,
                       decoration: BoxDecoration(

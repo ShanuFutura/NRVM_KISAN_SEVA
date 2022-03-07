@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MachinesView extends StatelessWidget {
-  static const String routeName = 'machines';
+  static const String routeName = 'pestview';
 
   @override
   Widget build(BuildContext context) {
