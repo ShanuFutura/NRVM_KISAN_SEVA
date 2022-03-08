@@ -2,13 +2,13 @@ import 'package:farmers_app/providers/http_providers.dart';
 import 'package:farmers_app/screens/admin_notifications.dart';
 import 'package:farmers_app/screens/crop_view.dart';
 import 'package:farmers_app/screens/faq_list.dart';
-import 'package:farmers_app/screens/fertilizers_list_screen.dart';
+// import 'package:farmers_app/screens/fertilizers_list_screen.dart';
 import 'package:farmers_app/screens/fertilizers_view.dart';
 import 'package:farmers_app/screens/home_page.dart';
 import 'package:farmers_app/screens/loading_screen.dart';
 import 'package:farmers_app/screens/machinary_list_screen.dart';
 import 'package:farmers_app/screens/machines_view.dart';
-import 'package:farmers_app/screens/pesticides_list.dart';
+import 'package:farmers_app/screens/pesticides_and_fertilizers_list.dart';
 import 'package:farmers_app/screens/profile_edit_screen.dart';
 import 'package:farmers_app/screens/registration.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,6 @@ class MainClass extends StatelessWidget {
       create: ((context) => HttpProviders()),
       child: MaterialApp(
         theme: ThemeData(
-          
             androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
             primarySwatch: Colors.green),
         home: FutureBuilder(
@@ -56,13 +55,14 @@ class MainClass extends StatelessWidget {
           Registration.routeName: (context) => Registration(),
           ProfileEditScreen.routeName: (context) => ProfileEditScreen(),
           CropView.routeName: (context) => CropView(),
-          FertilizersListScreen.routeName: (context) => FertilizersListScreen(),
+          // FertilizersListScreen.routeName: (context) => FertilizersListScreen(),
           MachinaryListScreen.routeName: (context) => MachinaryListScreen(),
           FertilizersView.routeName: (context) => FertilizersView(),
           MachinesView.routeName: (context) => MachinesView(),
           FAQList.routeName: (context) => FAQList(),
           AdminNotifications.routeName: (context) => AdminNotifications(),
-          PesticidesList.routeName: (context) => PesticidesList(),
+          PesticidesAndFertilizersList.routeName: (context) =>
+              PesticidesAndFertilizersList(),
         },
       ),
     );

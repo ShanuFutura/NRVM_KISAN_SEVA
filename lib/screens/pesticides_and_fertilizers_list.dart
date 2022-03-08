@@ -2,8 +2,8 @@ import 'package:farmers_app/providers/http_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PesticidesList extends StatelessWidget {
-  const PesticidesList({Key? key}) : super(key: key);
+class PesticidesAndFertilizersList extends StatelessWidget {
+  const PesticidesAndFertilizersList({Key? key}) : super(key: key);
 
   static const String routeName = 'pesticides';
 
@@ -11,7 +11,7 @@ class PesticidesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pesticides'),
+        title: Text('Pesticides & Fertilizers'),
       ),
       body: FutureBuilder(
         future: Provider.of<HttpProviders>(context).getPesticides(),

@@ -2,9 +2,10 @@ import 'package:farmers_app/models/dummies.dart';
 import 'package:farmers_app/providers/http_providers.dart';
 import 'package:farmers_app/screens/crop_view.dart';
 import 'package:farmers_app/screens/faq_list.dart';
-import 'package:farmers_app/screens/fertilizers_list_screen.dart';
+// import 'package:farmers_app/screens/fertilizers_list_screen.dart';
 import 'package:farmers_app/screens/machinary_list_screen.dart';
 import 'package:farmers_app/screens/machines_view.dart';
+import 'package:farmers_app/screens/pesticides_and_fertilizers_list.dart';
 import 'package:farmers_app/widgets/farmers_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -101,12 +102,12 @@ class HomePage extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context)
-                            .pushNamed(FertilizersListScreen.routeName);
+                            .pushNamed(PesticidesAndFertilizersList.routeName);
                       },
                       child: CircleAvatar(
                         radius: deviceHeight * .07,
                         child: Icon(
-                          Icons.grass,
+                          Icons.sanitizer,
                           size: deviceHeight * .08,
                         ),
                       ),

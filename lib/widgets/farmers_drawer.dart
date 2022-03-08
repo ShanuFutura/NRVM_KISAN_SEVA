@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:farmers_app/screens/admin_notifications.dart';
 import 'package:farmers_app/screens/faq_list.dart';
-import 'package:farmers_app/screens/fertilizers_list_screen.dart';
+// import 'package:farmers_app/screens/fertilizers_list_screen.dart';
 import 'package:farmers_app/screens/machinary_list_screen.dart';
-import 'package:farmers_app/screens/pesticides_list.dart';
+import 'package:farmers_app/screens/pesticides_and_fertilizers_list.dart';
 import 'package:farmers_app/screens/profile_edit_screen.dart';
 import 'package:farmers_app/screens/registration.dart';
 import 'package:flutter/material.dart';
@@ -53,15 +53,15 @@ class FarmersDrawer extends StatelessWidget {
             },
           ),
           Divider(),
-          ListTile(
-            title: Text('view fertilizers'),
-            trailing: Icon(Icons.grass),
-            onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pushNamed(FertilizersListScreen.routeName);
-            },
-          ),
-          Divider(),
+          // ListTile(
+          //   title: Text('view fertilizers'),
+          //   trailing: Icon(Icons.grass),
+          //   onTap: () {
+          //     Navigator.of(context).pop();
+          //     Navigator.of(context).pushNamed(PesticidesAndFertilizersList.routeName);
+          //   },
+          // ),
+          // Divider(),
           ListTile(
             title: Text('Admin notifications'),
             trailing: Icon(Icons.notifications),
@@ -81,11 +81,11 @@ class FarmersDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            title: Text('pesticides'),
+            title: Text('Pesticides & Fertilizers'),
             trailing: Icon(Icons.sanitizer),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context).pushNamed(PesticidesList.routeName);
+              Navigator.of(context).pushNamed(PesticidesAndFertilizersList.routeName);
             },
           ),
           Divider(),
