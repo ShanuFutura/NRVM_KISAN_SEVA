@@ -1,6 +1,7 @@
 import 'package:farmers_app/models/dummies.dart';
 import 'package:farmers_app/providers/http_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class FAQList extends StatefulWidget {
@@ -14,6 +15,7 @@ class FAQList extends StatefulWidget {
 
 var faquestion = '';
 final faqController = TextEditingController();
+var isSending = false;
 
 class _FAQListState extends State<FAQList> {
   @override
@@ -42,23 +44,36 @@ class _FAQListState extends State<FAQList> {
             : Theme.of(context).primaryColor,
         onPressed: faquestion.trim().isEmpty
             ? null
-            : () {
+            : () async {
                 setState(() {
-                  Provider.of<HttpProviders>(context, listen: false)
-                      .sendFAQ(faqController.text);
+                  isSending = true;
+                });
+                final succeed =
+                    await Provider.of<HttpProviders>(context, listen: false)
+                        .sendFAQ(faqController.text);
+                setState(() {
+                  isSending = false;
+                  Fluttertoast.showToast(
+                      msg: succeed ? 'sent' : 'couldn\'t send');
+                  if (succeed) {
+                    Dummies.faqList.add(faquestion);
+                  }
                   faquestion = '';
                   faqController.clear();
                   FocusScope.of(context).unfocus();
                 });
               },
-        child: Icon(
-            faquestion.trim().isEmpty ? Icons.contact_support : Icons.send),
+        child: isSending
+            ? CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('assets/step2_sending.gif'))
+            : Icon(
+                faquestion.trim().isEmpty ? Icons.contact_support : Icons.send),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: Transform.translate(
           offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
           child: BottomAppBar(
-            // clipBehavior: Clip.  ,
             notchMargin: 10,
             color: Colors.green,
             shape: CircularNotchedRectangle(),
@@ -78,15 +93,9 @@ class _FAQListState extends State<FAQList> {
                       faquestion = value;
                     });
                   },
-                  // color: Colors.white,
-                  // height: 50,
-                  // width: 100,
                 ),
               ),
             ),
-            //
-            // width: double.infinity,
-            // height: 60,
           )),
     );
   }

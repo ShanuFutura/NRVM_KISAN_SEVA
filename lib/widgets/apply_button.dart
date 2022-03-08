@@ -1,5 +1,6 @@
 import 'package:farmers_app/providers/http_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class ApplyButton extends StatefulWidget {
@@ -24,11 +25,17 @@ class _ApplyButtonState extends State<ApplyButton> {
           setState(() {
             isLoading = true;
           });
-          await Provider.of<HttpProviders>(context, listen: false)
-              .applyForMachine(widget.machineId as String);
+          final applied =
+              await Provider.of<HttpProviders>(context, listen: false)
+                  .applyForMachine(widget.machineId as String);
           setState(() {
             isLoading = false;
           });
+          if (applied) {
+            Fluttertoast.showToast(msg: 'applied');
+          } else {
+            Fluttertoast.showToast(msg: 'something went wrong try again');
+          }
         },
         icon: isLoading
             ? const Center(

@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 class CropView extends StatelessWidget {
   static const String routeName = 'cropview';
 
+  
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -28,9 +30,10 @@ class CropView extends StatelessWidget {
               children: [
                 Container(
                   height: 301,
-                  child: Image.network(Dummies.rootUrlforImages +
-                      'Images/' +
-                      (cropData)['image']),
+                  child: Image.network(
+                    Dummies.rootUrlforImages + 'Images/' + (cropData)['image'],
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10),

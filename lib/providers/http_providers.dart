@@ -66,25 +66,33 @@ class HttpProviders extends ChangeNotifier {
 
   Future<bool> applyForMachine(String equipmentId) async {
     final pref = await SharedPreferences.getInstance();
-    final res = await post(Uri.parse(Dummies.rootUrl + 'equipment_request.php'),
-        body: {
-          'farmer_id': pref.getString('farmerId'),
-          'equipment_id': equipmentId
-        }); //FARMER ID NEEDED!!!
-    print(res.body);
-    return jsonDecode(res.body) == 'requested';
+    print(pref.getString('farmerId'));
+    try {
+      final res = await post(
+          Uri.parse(Dummies.rootUrl + 'equipment_request.php'),
+          body: {
+            'farmer_id': pref.getString('farmerId'),
+            'equipment_id': equipmentId
+          }); //FARMER ID NEEDED!!!
+      final resText = await json.decode(json.encode(res.body));
+      print('application response' + resText.toString());
+      return resText.toString().trim() == 'requested';
+    } on Exception catch (err) {
+      print(err);
+      return false;
+    }
   }
 
   Future<bool> sendFAQ(String doubt) async {
     final pref = await SharedPreferences.getInstance();
-    
+
     final res = await post(Uri.parse(Dummies.rootUrl + 'doubt_send.php'),
         body: {
           'farmer_id': pref.getString('farmerId'),
           'doubt': doubt
         }); //FARMER ID NEEDED!!!
-    print('FAQ!!!!!!!!!!!!'+res.body);
-    return true;
+    print('FAQ!!!!!!!!!!!!' + res.body);
+    return jsonDecode(jsonEncode(res.body)).toString().trim() == 'successfull';
   }
 
   Future<dynamic> getNotifications() async {

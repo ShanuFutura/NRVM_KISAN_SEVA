@@ -4,9 +4,14 @@ import 'package:farmers_app/widgets/apply_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MachinesView extends StatelessWidget {
+class MachinesView extends StatefulWidget {
   static const String routeName = 'machines';
 
+  @override
+  State<MachinesView> createState() => _MachinesViewState();
+}
+
+class _MachinesViewState extends State<MachinesView> {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
