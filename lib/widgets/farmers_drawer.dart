@@ -31,8 +31,24 @@ class FarmersDrawer extends StatelessWidget {
                         .pushNamed(ProfileEditScreen.routeName);
                   },
                   child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/avatar.png'),
+                    // backgroundImage: AssetImage('assets/crop.webp'),
                     radius: 80,
+                    child: Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        Image.asset(
+                          'assets/thermo_icon.webp',
+                        ),
+                        Positioned(
+                          top: 100,
+                          left: 90,
+                          child: Text(
+                            '30°C',
+                            style: TextStyle(fontSize: 25),
+                          ),
+                        ),
+                      ],
+                    ),
                     // backgroundImage: profileImage != null
                     //     ? FileImage(profileImage) as ImageProvider
                     //     : AssetImage(
@@ -85,7 +101,8 @@ class FarmersDrawer extends StatelessWidget {
             trailing: Icon(Icons.sanitizer),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context).pushNamed(PesticidesAndFertilizersList.routeName);
+              Navigator.of(context)
+                  .pushNamed(PesticidesAndFertilizersList.routeName);
             },
           ),
           Divider(),

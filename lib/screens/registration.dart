@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:farmers_app/providers/http_providers.dart';
 import 'package:farmers_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +34,14 @@ class _RegistrationState extends State<Registration> {
       fkey.currentState!.save();
       var succeed;
       if (isLogin) {
+        print('passing: ' + username + password);
         succeed = await Provider.of<HttpProviders>(context, listen: false)
             .farmerLogin(username, password);
         setState(() {
           isLoading = false;
         });
       } else {
-        succeed= await Provider.of<HttpProviders>(context,listen:  false)
+        succeed = await Provider.of<HttpProviders>(context, listen: false)
             .farmersRegister(name, email, phone, username, password);
         setState(() {
           isLoading = false;
@@ -48,6 +51,15 @@ class _RegistrationState extends State<Registration> {
         final pref = await SharedPreferences.getInstance();
         pref.setBool('isLogged', true);
         Navigator.of(context).pushNamed(HomePage.routeName);
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Couldn\'t login'),
+                content: Text('Something went wrong'),
+              );
+            });
       }
     }
   }
@@ -69,7 +81,7 @@ class _RegistrationState extends State<Registration> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      height: 40,
+                      // height: 40,
                       width: deviceWidth * .8,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -78,6 +90,7 @@ class _RegistrationState extends State<Registration> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 2, horizontal: 15),
                         child: TextFormField(
+                          //autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: const InputDecoration(
                             hintText: 'usrename',
                           ),
@@ -95,7 +108,7 @@ class _RegistrationState extends State<Registration> {
                     if (!isLogin)
                       Container(
                         key: Key('name'),
-                        height: 40,
+                        // height: 40,
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
@@ -104,6 +117,7 @@ class _RegistrationState extends State<Registration> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 2, horizontal: 15),
                           child: TextFormField(
+                            //autovalidateMode: AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.name,
                             textCapitalization: TextCapitalization.words,
                             decoration: const InputDecoration(
@@ -123,7 +137,7 @@ class _RegistrationState extends State<Registration> {
                     if (!isLogin)
                       Container(
                         key: Key('mail'),
-                        height: 40,
+                        // height: 40,
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
@@ -132,6 +146,7 @@ class _RegistrationState extends State<Registration> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 2, horizontal: 15),
                           child: TextFormField(
+                            //autovalidateMode: AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               hintText: 'email',
@@ -152,7 +167,7 @@ class _RegistrationState extends State<Registration> {
                     if (!isLogin)
                       Container(
                         key: Key('phone'),
-                        height: 40,
+                        // height: 40,
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
@@ -161,6 +176,7 @@ class _RegistrationState extends State<Registration> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 2, horizontal: 15),
                           child: TextFormField(
+                            //autovalidateMode: AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               hintText: 'phone',
@@ -180,7 +196,7 @@ class _RegistrationState extends State<Registration> {
                       ),
                     Container(
                       key: Key('pass'),
-                      height: 40,
+                      // height: 40,
                       width: deviceWidth * .8,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -189,6 +205,7 @@ class _RegistrationState extends State<Registration> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 2, horizontal: 15),
                         child: TextFormField(
+                          //autovalidateMode: AutovalidateMode.onUserInteraction,
                           obscureText: true,
                           decoration: InputDecoration(
                             hintText: 'password',
@@ -219,7 +236,7 @@ class _RegistrationState extends State<Registration> {
                         trySubmit();
                       },
                       child: Text(
-                        isLogin ? 'Login' : 'Sign Up',
+                        isLogin ? 'Login' : 'Signup',
                         style: TextStyle(fontSize: 30, color: Colors.green),
                       ),
                     ),

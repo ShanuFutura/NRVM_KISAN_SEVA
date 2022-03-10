@@ -13,6 +13,7 @@ class MachinesView extends StatefulWidget {
 
 class _MachinesViewState extends State<MachinesView> {
   @override
+  @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final machineId = ModalRoute.of(context)!.settings.arguments;
@@ -21,6 +22,11 @@ class _MachinesViewState extends State<MachinesView> {
             .firstWhere((element) => element['equipment_id'] == machineId);
     print('machine Id' + machineId.toString());
     print('machineData' + machineData.toString());
+    // precacheImage(
+    //     NetworkImage(
+    //       Dummies.rootUrlforImages + 'Images/' + (machineData)['image'],
+    //     ),
+    //     context);
 
     return Scaffold(
       body: CustomScrollView(slivers: [

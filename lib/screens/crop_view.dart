@@ -1,3 +1,6 @@
+// import 'dart:html';
+import 'dart:io';
+
 import 'package:farmers_app/models/dummies.dart';
 import 'package:farmers_app/providers/http_providers.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +18,7 @@ class CropView extends StatelessWidget {
     final cropData = (Provider.of<HttpProviders>(context).cropsList as List)
         .firstWhere((element) => element['crop_id'] == cropId);
 
-    return Scaffold(
+    return  Scaffold(
       body: CustomScrollView(slivers: [
         SliverAppBar(
           pinned: true,

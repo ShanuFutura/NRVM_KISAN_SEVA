@@ -15,11 +15,19 @@ class HttpProviders extends ChangeNotifier {
   Future<bool> farmerLogin(String username, String password) async {
     final pref = await SharedPreferences.getInstance();
 
-    final res = await post(Uri.parse(Dummies.rootUrl + 'login.php'),
-        body: {'username': username, 'password': password});
-    print(res.body);
-    pref.setString('farmerId', jsonDecode(res.body)['farmer_id']);
-    return jsonDecode(res.body)['message'] == 'User Successfully LoggedIn';
+    try {
+      final res = await post(Uri.parse(Dummies.rootUrl + 'login.php'),
+          body: {'username': username, 'password': password});
+      print(res.body);
+      if (jsonDecode(res.body)['message'] == 'User Successfully LoggedIn') {
+        pref.setString('farmerId', jsonDecode(res.body)['farmer_id']);
+        return true;
+      } else
+        return false;
+    } on Exception catch (error) {
+      print(error);
+      return false;
+    }
   }
 
   Future<bool> farmersRegister(
@@ -106,6 +114,14 @@ class HttpProviders extends ChangeNotifier {
     final res = await get(Uri.parse(Dummies.rootUrl + 'pesticide_list.php'));
     print('pesticides : ' + res.body);
     notifications = jsonDecode(res.body);
+    return jsonDecode(res.body);
+  }
+
+  Future<dynamic> getFAQList() async {
+    final pref = await SharedPreferences.getInstance();
+    final res = await post(Uri.parse(Dummies.rootUrl + 'doubt_list.php'),
+        body: {'farmer_id': '1'});
+    print('faqlist : ' + res.body);
     return jsonDecode(res.body);
   }
 }

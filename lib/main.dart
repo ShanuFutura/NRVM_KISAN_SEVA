@@ -33,7 +33,7 @@ class MainClass extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
             androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
-            primarySwatch: Colors.green),
+            primarySwatch: Colors.teal),
         home: FutureBuilder(
           future: rememberUser(),
           builder: (context, snap) {

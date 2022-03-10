@@ -18,6 +18,16 @@ final faqController = TextEditingController();
 var isSending = false;
 
 class _FAQListState extends State<FAQList> {
+  popUpAnser(BuildContext context, String reply) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text('answer: ' + reply),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -26,18 +36,71 @@ class _FAQListState extends State<FAQList> {
       appBar: AppBar(
         title: Text('FAQ'),
       ),
-      body: ListView.builder(
-        itemCount: Dummies.faqList.length,
-        itemBuilder: (context, index) {
-          return Card(
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(Dummies.faqList[index]),
-            ),
-          );
-        },
-      ),
+      body: FutureBuilder(
+          future: Provider.of<HttpProviders>(context).getFAQList(),
+          builder: (context, snap) {
+            if (snap.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snap.hasData) {
+              return ListView.builder(
+                itemCount: (snap.data as List).length,
+                itemBuilder: (context, index) {
+                  final hasReply =
+                      ((snap.data as dynamic)[index]['reply'] == '');
+                  return Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      GestureDetector(
+                        onTap: hasReply
+                            ? () {
+                                Fluttertoast.showToast(
+                                    msg: 'No reply recieved',
+                                    backgroundColor:
+                                        Theme.of(context).primaryColorDark,
+                                    toastLength: Toast.LENGTH_SHORT);
+                              }
+                            : () {
+                                popUpAnser(context,
+                                    (snap.data as dynamic)[index]['reply']);
+                              },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 10),
+                          width: double.infinity,
+                          child: Card(
+                            color: hasReply
+                                ? Theme.of(context).canvasColor
+                                : Theme.of(context).primaryColorLight,
+                            elevation: 5,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child:
+                                  Text((snap.data as dynamic)[index]['doubt']),
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (!hasReply)
+                        const Positioned(
+                          right: 10,
+                          top: 5,
+                          child: CircleAvatar(
+                            radius: 8,
+                            backgroundColor: Colors.red,
+                          ),
+                        )
+                    ],
+                  );
+                },
+              );
+            } else {
+              return Center(
+                child: Text('something went wrong'),
+              );
+            }
+          }),
       floatingActionButton: FloatingActionButton(
         backgroundColor: faquestion.trim().isEmpty
             ? Colors.grey
@@ -56,7 +119,7 @@ class _FAQListState extends State<FAQList> {
                   Fluttertoast.showToast(
                       msg: succeed ? 'sent' : 'couldn\'t send');
                   if (succeed) {
-                    Dummies.faqList.add(faquestion);
+                    // Dummies.faqList.add(faquestion);
                   }
                   faquestion = '';
                   faqController.clear();
@@ -75,7 +138,7 @@ class _FAQListState extends State<FAQList> {
           offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
           child: BottomAppBar(
             notchMargin: 10,
-            color: Colors.green,
+            color: Theme.of(context).primaryColor,
             shape: CircularNotchedRectangle(),
             child: Padding(
               padding: EdgeInsets.all(8.0),

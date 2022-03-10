@@ -23,6 +23,18 @@ class HomePage extends StatelessWidget {
       drawer: FarmersDrawer(),
       appBar: AppBar(
         title: Text('Farmers App'),
+        actions: const [
+          Icon(Icons.thermostat),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Center(
+              child: Text(
+                '30°C',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          )
+        ],
       ),
       body: FutureBuilder(
         future: Provider.of<HttpProviders>(context).getCrops(),
