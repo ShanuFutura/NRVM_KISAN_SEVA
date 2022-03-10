@@ -41,6 +41,7 @@ class MainClass extends StatelessWidget {
               return LoadingScreen();
             } else if (snap.connectionState == ConnectionState.done) {
               if (snap.data as bool) {
+                // Provider.of<HttpProviders>(context).weather();
                 return HomePage();
               } else {
                 return Registration();

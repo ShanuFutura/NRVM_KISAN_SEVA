@@ -41,7 +41,8 @@ class MachinaryListScreen extends StatelessWidget {
                     ),
                     title: Text((snap.data as dynamic)[index]['equipment']),
                     // subtitle: Text('test'),
-                    trailing: Icon(Icons.info),
+                    trailing: TextButton(
+                        onPressed: null, child: Icon(Icons.visibility)),
                   );
                 });
           } else {

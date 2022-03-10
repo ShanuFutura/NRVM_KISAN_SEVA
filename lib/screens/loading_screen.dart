@@ -5,14 +5,9 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceWidth=MediaQuery.of(context).size.width;
-    return  Scaffold(
-      body: Center(
-          child: Icon(
-        Icons.grass,
-        color: Colors.green,
-        size: deviceWidth *.3,
-      )),
+    final deviceWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+      body: Center(child: CircularProgressIndicator()),
     );
   }
 }

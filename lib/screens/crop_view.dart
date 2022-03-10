@@ -9,8 +9,6 @@ import 'package:provider/provider.dart';
 class CropView extends StatelessWidget {
   static const String routeName = 'cropview';
 
-  
-
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -18,7 +16,7 @@ class CropView extends StatelessWidget {
     final cropData = (Provider.of<HttpProviders>(context).cropsList as List)
         .firstWhere((element) => element['crop_id'] == cropId);
 
-    return  Scaffold(
+    return Scaffold(
       body: CustomScrollView(slivers: [
         SliverAppBar(
           pinned: true,
@@ -32,10 +30,10 @@ class CropView extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               children: [
                 Container(
-                  height: 301,
+                  height: double.infinity,
                   child: Image.network(
                     Dummies.rootUrlforImages + 'Images/' + (cropData)['image'],
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                 ),
                 Padding(
@@ -51,29 +49,44 @@ class CropView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      'Details',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: deviceWidth * .2),
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: deviceWidth * .05),
+                  child: Chip(
+                    label: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Season: ' + (cropData as Map)['season'],
                         style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColorDark),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
-              Text((cropData as Map)['description'])
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 8.0),
+                child: Text(
+                  'Details',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Card(
+                  shadowColor: Colors.black,
+                  elevation: 8,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Text(
+                      (cropData as Map)['description'],
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ))
             ],
           ),
         )),

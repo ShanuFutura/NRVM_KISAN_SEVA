@@ -44,57 +44,63 @@ class _FAQListState extends State<FAQList> {
                 child: CircularProgressIndicator(),
               );
             } else if (snap.hasData) {
-              return ListView.builder(
-                itemCount: (snap.data as List).length,
-                itemBuilder: (context, index) {
-                  final hasReply =
-                      ((snap.data as dynamic)[index]['reply'] == '');
-                  return Stack(
-                    alignment: Alignment.topRight,
-                    children: [
-                      GestureDetector(
-                        onTap: hasReply
-                            ? () {
-                                Fluttertoast.showToast(
-                                    msg: 'No reply recieved',
-                                    backgroundColor:
-                                        Theme.of(context).primaryColorDark,
-                                    toastLength: Toast.LENGTH_SHORT);
-                              }
-                            : () {
-                                popUpAnser(context,
-                                    (snap.data as dynamic)[index]['reply']);
-                              },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 5, horizontal: 10),
-                          width: double.infinity,
-                          child: Card(
-                            color: hasReply
-                                ? Theme.of(context).canvasColor
-                                : Theme.of(context).primaryColorLight,
-                            elevation: 5,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child:
-                                  Text((snap.data as dynamic)[index]['doubt']),
+              if ((snap.data as dynamic)[0]['message'] == 'failed') {
+                return Center(
+                  child: Text('No Chats yet'),
+                );
+              } else {
+                return ListView.builder(
+                  itemCount: (snap.data as List).length,
+                  itemBuilder: (context, index) {
+                    final hasReply =
+                        ((snap.data as dynamic)[index]['reply'] == '');
+                    return Stack(
+                      alignment: Alignment.topRight,
+                      children: [
+                        GestureDetector(
+                          onTap: hasReply
+                              ? () {
+                                  Fluttertoast.showToast(
+                                      msg: 'No reply recieved',
+                                      backgroundColor:
+                                          Theme.of(context).primaryColorDark,
+                                      toastLength: Toast.LENGTH_SHORT);
+                                }
+                              : () {
+                                  popUpAnser(context,
+                                      (snap.data as dynamic)[index]['reply']);
+                                },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10),
+                            width: double.infinity,
+                            child: Card(
+                              color: hasReply
+                                  ? Theme.of(context).canvasColor
+                                  : Theme.of(context).primaryColorLight,
+                              elevation: 5,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                    (snap.data as dynamic)[index]['doubt']),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      if (!hasReply)
-                        const Positioned(
-                          right: 10,
-                          top: 5,
-                          child: CircleAvatar(
-                            radius: 8,
-                            backgroundColor: Colors.red,
-                          ),
-                        )
-                    ],
-                  );
-                },
-              );
+                        if (!hasReply)
+                          const Positioned(
+                            right: 10,
+                            top: 5,
+                            child: CircleAvatar(
+                              radius: 8,
+                              backgroundColor: Colors.red,
+                            ),
+                          )
+                      ],
+                    );
+                  },
+                );
+              }
             } else {
               return Center(
                 child: Text('something went wrong'),

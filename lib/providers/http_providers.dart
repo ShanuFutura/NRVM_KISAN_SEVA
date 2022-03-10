@@ -9,6 +9,8 @@ class HttpProviders extends ChangeNotifier {
   var cropsList;
   var machinesList;
   var notifications;
+  var temp;
+  var humidity;
 
   // var farmerId;
 
@@ -120,8 +122,20 @@ class HttpProviders extends ChangeNotifier {
   Future<dynamic> getFAQList() async {
     final pref = await SharedPreferences.getInstance();
     final res = await post(Uri.parse(Dummies.rootUrl + 'doubt_list.php'),
-        body: {'farmer_id': '1'});
+        body: {'farmer_id': pref.getString('farmerId')});
     print('faqlist : ' + res.body);
     return jsonDecode(res.body);
   }
+
+  Future<dynamic> weather() async {
+    final pref = await SharedPreferences.getInstance();
+    final res = await post(Uri.parse(Dummies.rootUrl + 'iot.php'), body: {
+      'farmer_id': pref.getString('farmerId'),
+    });
+    print('TEmperature' + res.body);
+    temp = jsonDecode(res.body)['temparature'];
+    humidity = jsonDecode(res.body)['humidity'];
+  }
+
+  
 }

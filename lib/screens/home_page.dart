@@ -23,15 +23,26 @@ class HomePage extends StatelessWidget {
       drawer: FarmersDrawer(),
       appBar: AppBar(
         title: Text('Farmers App'),
-        actions: const [
+        actions: [
           Icon(Icons.thermostat),
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Center(
-              child: Text(
-                '30°C',
-                style: TextStyle(fontSize: 20),
-              ),
+              child: FutureBuilder(
+                  future: Provider.of<HttpProviders>(context).weather(),
+                  builder: (context, snap) {
+                    if (snap.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return Text(
+                        Provider.of<HttpProviders>(context).temp.toString() +
+                            '°C',
+                        style: TextStyle(fontSize: 20),
+                      );
+                    }
+                  }),
             ),
           )
         ],

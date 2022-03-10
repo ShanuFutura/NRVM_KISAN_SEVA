@@ -69,20 +69,25 @@ class _MachinesViewState extends State<MachinesView> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   (machineData as Map)['equipment'],
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
               ),
-              Text((machineData as Map)['description']),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ApplyButton(machineId: machineId),
-                ],
-              ),
+              Card(
+                  shadowColor: Colors.black,
+                  elevation: 8,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Text(
+                      (machineData as Map)['description'],
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  )),
+              
             ],
           ),
         )),
       ]),
+      floatingActionButton: ApplyButton(machineId: machineId),
     );
   }
 }

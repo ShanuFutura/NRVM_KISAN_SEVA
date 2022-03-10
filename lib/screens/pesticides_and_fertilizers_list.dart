@@ -25,9 +25,22 @@ class PesticidesAndFertilizersList extends StatelessWidget {
                 itemCount: (snap.data as List).length,
                 itemBuilder: ((context, index) {
                   return ListTile(
+                    onTap: () {},
                     title: Text((snap.data as dynamic)[index]['name']),
                     // subtitle: Text((snap.data as dynamic)[index]['']),
-                    trailing: TextButton(onPressed: () {}, child: Text('View')),
+                    trailing: TextButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text('Details'),
+                                  content: Text((snap.data as dynamic)[index]
+                                      ['description']),
+                                );
+                              });
+                        },
+                        child: Text('View')),
                   );
                 }));
           } else {

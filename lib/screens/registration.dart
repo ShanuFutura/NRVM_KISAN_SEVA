@@ -80,31 +80,6 @@ class _RegistrationState extends State<Registration> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      // height: 40,
-                      width: deviceWidth * .8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(125, 0, 128, 32)),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 2, horizontal: 15),
-                        child: TextFormField(
-                          //autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: const InputDecoration(
-                            hintText: 'usrename',
-                          ),
-                          validator: (v) {
-                            if (v!.trim().isEmpty) {
-                              return 'username cannot be empty';
-                            }
-                          },
-                          onSaved: (v) {
-                            username = v;
-                          },
-                        ),
-                      ),
-                    ),
                     if (!isLogin)
                       Container(
                         key: Key('name'),
@@ -112,7 +87,7 @@ class _RegistrationState extends State<Registration> {
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Color.fromARGB(51, 0, 87, 29)),
+                            color: Color.fromARGB(125, 0, 128, 32)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 2, horizontal: 15),
@@ -141,7 +116,7 @@ class _RegistrationState extends State<Registration> {
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Color.fromARGB(51, 0, 87, 29)),
+                            color: Color.fromARGB(125, 0, 128, 32)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 2, horizontal: 15),
@@ -171,7 +146,7 @@ class _RegistrationState extends State<Registration> {
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Color.fromARGB(51, 0, 87, 29)),
+                            color: Color.fromARGB(125, 0, 128, 32)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 2, horizontal: 15),
@@ -195,12 +170,37 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                     Container(
+                      // height: 40,
+                      width: deviceWidth * .8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color.fromARGB(125, 0, 128, 32)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 15),
+                        child: TextFormField(
+                          //autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: const InputDecoration(
+                            hintText: 'usrename',
+                          ),
+                          validator: (v) {
+                            if (v!.trim().isEmpty) {
+                              return 'username cannot be empty';
+                            }
+                          },
+                          onSaved: (v) {
+                            username = v;
+                          },
+                        ),
+                      ),
+                    ),
+                    Container(
                       key: Key('pass'),
                       // height: 40,
                       width: deviceWidth * .8,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(51, 0, 31, 8)),
+                          color: Color.fromARGB(125, 0, 128, 32)),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 2, horizontal: 15),
