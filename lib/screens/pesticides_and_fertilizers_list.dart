@@ -11,13 +11,13 @@ class PesticidesAndFertilizersList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pesticides & Fertilizers'),
+        title:  const Text('Pesticides & Fertilizers'),
       ),
       body: FutureBuilder(
         future: Provider.of<HttpProviders>(context).getPesticides(),
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.waiting) {
-            return Center(
+            return  const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snap.hasData) {
@@ -27,24 +27,23 @@ class PesticidesAndFertilizersList extends StatelessWidget {
                   return ListTile(
                     onTap: () {},
                     title: Text((snap.data as dynamic)[index]['name']),
-                    // subtitle: Text((snap.data as dynamic)[index]['']),
                     trailing: TextButton(
                         onPressed: () {
                           showDialog(
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: Text('Details'),
+                                  title:  const Text('Details'),
                                   content: Text((snap.data as dynamic)[index]
                                       ['description']),
                                 );
                               });
                         },
-                        child: Text('View')),
+                        child:  const Text('View')),
                   );
                 }));
           } else {
-            return Center(
+            return  const Center(
               child: Text('Couldn\' fetch data'),
             );
           }

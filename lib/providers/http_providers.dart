@@ -12,8 +12,6 @@ class HttpProviders extends ChangeNotifier {
   var temp;
   var humidity;
 
-  // var farmerId;
-
   Future<bool> farmerLogin(String username, String password) async {
     final pref = await SharedPreferences.getInstance();
 
@@ -49,7 +47,7 @@ class HttpProviders extends ChangeNotifier {
         'password': password,
       });
       print(res.body);
-      // farmerId = jsonDecode(res.body)['farmer_id'];
+
       final pref = await SharedPreferences.getInstance();
       pref.setString('farmerId', jsonDecode(res.body)['farmer_id']);
       return jsonDecode(res.body)['farmer_id'] != null;
@@ -83,7 +81,7 @@ class HttpProviders extends ChangeNotifier {
           body: {
             'farmer_id': pref.getString('farmerId'),
             'equipment_id': equipmentId
-          }); //FARMER ID NEEDED!!!
+          });
       final resText = await json.decode(json.encode(res.body));
       print('application response' + resText.toString());
       return resText.toString().trim() == 'requested';
@@ -97,10 +95,7 @@ class HttpProviders extends ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
 
     final res = await post(Uri.parse(Dummies.rootUrl + 'doubt_send.php'),
-        body: {
-          'farmer_id': pref.getString('farmerId'),
-          'doubt': doubt
-        }); //FARMER ID NEEDED!!!
+        body: {'farmer_id': pref.getString('farmerId'), 'doubt': doubt});
     print('FAQ!!!!!!!!!!!!' + res.body);
     return jsonDecode(jsonEncode(res.body)).toString().trim() == 'successfull';
   }
@@ -136,6 +131,4 @@ class HttpProviders extends ChangeNotifier {
     temp = jsonDecode(res.body)['temparature'];
     humidity = jsonDecode(res.body)['humidity'];
   }
-
-  
 }

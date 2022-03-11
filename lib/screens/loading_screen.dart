@@ -5,8 +5,8 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
+    // final deviceWidth = MediaQuery.of(context).size.width;
+    return  const Scaffold(
       body: Center(child: CircularProgressIndicator()),
     );
   }

@@ -1,5 +1,4 @@
-// import 'dart:html';
-import 'dart:io';
+
 
 import 'package:farmers_app/models/dummies.dart';
 import 'package:farmers_app/providers/http_providers.dart';
@@ -24,7 +23,7 @@ class CropView extends StatelessWidget {
           flexibleSpace: FlexibleSpaceBar(
             title: Text(
               (cropData as Map)['crop'],
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style:  const TextStyle(color: Colors.white, fontSize: 20),
             ),
             background: Stack(
               alignment: Alignment.bottomLeft,
@@ -36,8 +35,8 @@ class CropView extends StatelessWidget {
                     fit: BoxFit.fill,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
+                 const Padding(
+                  padding:  EdgeInsets.all(10),
                 )
               ],
             ),
@@ -49,7 +48,7 @@ class CropView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const  SizedBox(
                 height: 20,
               ),
               Center(
@@ -59,7 +58,7 @@ class CropView extends StatelessWidget {
                     label: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Season: ' + (cropData as Map)['season'],
+                        'Season: ' + (cropData )['season'],
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -69,9 +68,9 @@ class CropView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
+              const  Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 8.0),
+                     EdgeInsets.symmetric(vertical: 15, horizontal: 8.0),
                 child: Text(
                   'Details',
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -83,8 +82,8 @@ class CropView extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Text(
-                      (cropData as Map)['description'],
-                      style: TextStyle(fontSize: 20),
+                      (cropData )['description'],
+                      style:  const TextStyle(fontSize: 20),
                     ),
                   ))
             ],

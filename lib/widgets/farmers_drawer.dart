@@ -1,9 +1,8 @@
-// import 'dart:html';
-import 'dart:io';
+
 
 import 'package:farmers_app/screens/admin_notifications.dart';
 import 'package:farmers_app/screens/faq_list.dart';
-// import 'package:farmers_app/screens/fertilizers_list_screen.dart';
+
 import 'package:farmers_app/screens/machinary_list_screen.dart';
 import 'package:farmers_app/screens/pesticides_and_fertilizers_list.dart';
 import 'package:farmers_app/screens/profile_edit_screen.dart';
@@ -20,10 +19,9 @@ class FarmersDrawer extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            // height: 300,
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 40),
+              padding: const  EdgeInsets.symmetric(vertical: 40),
               child: Center(
                 child: GestureDetector(
                   onTap: () {
@@ -31,7 +29,6 @@ class FarmersDrawer extends StatelessWidget {
                         .pushNamed(ProfileEditScreen.routeName);
                   },
                   child: CircleAvatar(
-                    // backgroundImage: AssetImage('assets/crop.webp'),
                     radius: 80,
                     child: Stack(
                       alignment: Alignment.bottomRight,
@@ -39,7 +36,7 @@ class FarmersDrawer extends StatelessWidget {
                         Image.asset(
                           'assets/thermo_icon.webp',
                         ),
-                        Positioned(
+                       const   Positioned(
                           top: 100,
                           left: 90,
                           child: Text(
@@ -49,66 +46,52 @@ class FarmersDrawer extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // backgroundImage: profileImage != null
-                    //     ? FileImage(profileImage) as ImageProvider
-                    //     : AssetImage(
-                    //         'assets/avatar.png',
-                    //       ),
                   ),
                 ),
               ),
             ),
           ),
-          Divider(),
+          const  Divider(),
           ListTile(
-            title: Text('View available machines'),
-            trailing: Icon(Icons.precision_manufacturing),
+            title: const  Text('View available machines'),
+            trailing: const  Icon(Icons.precision_manufacturing),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(MachinaryListScreen.routeName);
             },
           ),
-          Divider(),
-          // ListTile(
-          //   title: Text('view fertilizers'),
-          //   trailing: Icon(Icons.grass),
-          //   onTap: () {
-          //     Navigator.of(context).pop();
-          //     Navigator.of(context).pushNamed(PesticidesAndFertilizersList.routeName);
-          //   },
-          // ),
-          // Divider(),
+          const  Divider(),
           ListTile(
-            title: Text('Admin notifications'),
-            trailing: Icon(Icons.notifications),
+            title:  const Text('Admin notifications'),
+            trailing:  const Icon(Icons.notifications),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(AdminNotifications.routeName);
             },
           ),
-          Divider(),
+          const  Divider(),
           ListTile(
-            title: Text('contact support team'),
-            trailing: Icon(Icons.support_agent),
+            title: const  Text('contact support team'),
+            trailing: const  Icon(Icons.support_agent),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(FAQList.routeName);
             },
           ),
-          Divider(),
+          const  Divider(),
           ListTile(
-            title: Text('Pesticides & Fertilizers'),
-            trailing: Icon(Icons.sanitizer),
+            title: const  Text('Pesticides & Fertilizers'),
+            trailing:  const Icon(Icons.sanitizer),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context)
                   .pushNamed(PesticidesAndFertilizersList.routeName);
             },
           ),
-          Divider(),
+          const  Divider(),
           ListTile(
-            title: Text('Logout'),
-            trailing: Icon(Icons.logout),
+            title: const  Text('Logout'),
+            trailing:  const Icon(Icons.logout),
             onTap: () async {
               Navigator.of(context).pop();
               final pref = await SharedPreferences.getInstance();
@@ -118,7 +101,7 @@ class FarmersDrawer extends StatelessWidget {
                   .pushReplacementNamed(Registration.routeName);
             },
           ),
-          Divider(),
+           const Divider(),
         ],
       ),
     );

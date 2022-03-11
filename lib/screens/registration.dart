@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:farmers_app/providers/http_providers.dart';
 import 'package:farmers_app/screens/home_page.dart';
@@ -55,7 +55,7 @@ class _RegistrationState extends State<Registration> {
         showDialog(
             context: context,
             builder: (context) {
-              return AlertDialog(
+              return const  AlertDialog(
                 title: Text('Couldn\'t login'),
                 content: Text('Something went wrong'),
               );
@@ -82,17 +82,15 @@ class _RegistrationState extends State<Registration> {
                   children: [
                     if (!isLogin)
                       Container(
-                        key: Key('name'),
-                        // height: 40,
+                        key: const  Key('name'),
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Color.fromARGB(125, 0, 128, 32)),
+                            color: const  Color.fromARGB(125, 0, 128, 32)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 2, horizontal: 15),
                           child: TextFormField(
-                            //autovalidateMode: AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.name,
                             textCapitalization: TextCapitalization.words,
                             decoration: const InputDecoration(
@@ -111,19 +109,17 @@ class _RegistrationState extends State<Registration> {
                       ),
                     if (!isLogin)
                       Container(
-                        key: Key('mail'),
-                        // height: 40,
+                        key:  const Key('mail'),
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Color.fromARGB(125, 0, 128, 32)),
+                            color:  const Color.fromARGB(125, 0, 128, 32)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 2, horizontal: 15),
                           child: TextFormField(
-                            //autovalidateMode: AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
+                            decoration: const  InputDecoration(
                               hintText: 'email',
                             ),
                             validator: (v) {
@@ -141,19 +137,17 @@ class _RegistrationState extends State<Registration> {
                       ),
                     if (!isLogin)
                       Container(
-                        key: Key('phone'),
-                        // height: 40,
+                        key: const  Key('phone'),
                         width: deviceWidth * .8,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Color.fromARGB(125, 0, 128, 32)),
+                            color: const  Color.fromARGB(125, 0, 128, 32)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 2, horizontal: 15),
                           child: TextFormField(
-                            //autovalidateMode: AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
+                            decoration:  const InputDecoration(
                               hintText: 'phone',
                             ),
                             validator: (v) {
@@ -170,16 +164,14 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                     Container(
-                      // height: 40,
                       width: deviceWidth * .8,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(125, 0, 128, 32)),
+                          color:  const Color.fromARGB(125, 0, 128, 32)),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 2, horizontal: 15),
                         child: TextFormField(
-                          //autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: const InputDecoration(
                             hintText: 'usrename',
                           ),
@@ -195,19 +187,17 @@ class _RegistrationState extends State<Registration> {
                       ),
                     ),
                     Container(
-                      key: Key('pass'),
-                      // height: 40,
+                      key: const  Key('pass'),
                       width: deviceWidth * .8,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(125, 0, 128, 32)),
+                          color:  const Color.fromARGB(125, 0, 128, 32)),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 2, horizontal: 15),
                         child: TextFormField(
-                          //autovalidateMode: AutovalidateMode.onUserInteraction,
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const  InputDecoration(
                             hintText: 'password',
                           ),
                           validator: (v) {
@@ -227,7 +217,7 @@ class _RegistrationState extends State<Registration> {
                 ),
               ),
               isLoading
-                  ? Center(
+                  ? const  Center(
                       child: CircularProgressIndicator(),
                     )
                   : TextButton(
@@ -237,7 +227,7 @@ class _RegistrationState extends State<Registration> {
                       },
                       child: Text(
                         isLogin ? 'Login' : 'Signup',
-                        style: TextStyle(fontSize: 30, color: Colors.green),
+                        style:  const TextStyle(fontSize: 30, color: Colors.green),
                       ),
                     ),
               TextButton(
@@ -248,7 +238,7 @@ class _RegistrationState extends State<Registration> {
                 },
                 child: Text(
                   isLogin ? 'signup instead' : 'login instead',
-                  style: TextStyle(color: Color.fromARGB(255, 0, 97, 3)),
+                  style:  const TextStyle(color: Color.fromARGB(255, 0, 97, 3)),
                 ),
               ),
               const SizedBox(

@@ -15,18 +15,13 @@ class _MachinesViewState extends State<MachinesView> {
   @override
   @override
   Widget build(BuildContext context) {
-    final deviceWidth = MediaQuery.of(context).size.width;
+    // final deviceWidth = MediaQuery.of(context).size.width;
     final machineId = ModalRoute.of(context)!.settings.arguments;
     final machineData =
         (Provider.of<HttpProviders>(context).machinesList as List)
             .firstWhere((element) => element['equipment_id'] == machineId);
     print('machine Id' + machineId.toString());
     print('machineData' + machineData.toString());
-    // precacheImage(
-    //     NetworkImage(
-    //       Dummies.rootUrlforImages + 'Images/' + (machineData)['image'],
-    //     ),
-    //     context);
 
     return Scaffold(
       body: CustomScrollView(slivers: [
@@ -34,9 +29,8 @@ class _MachinesViewState extends State<MachinesView> {
           pinned: true,
           expandedHeight: 300,
           flexibleSpace: FlexibleSpaceBar(
-            title: Text(
+            title: const  Text(
               '',
-              // '',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             background: Stack(
@@ -44,7 +38,6 @@ class _MachinesViewState extends State<MachinesView> {
               children: [
                 Container(
                   width: double.infinity,
-                  // height: 301,
                   child: Image.network(
                     Dummies.rootUrlforImages +
                         'Images/' +
@@ -52,7 +45,7 @@ class _MachinesViewState extends State<MachinesView> {
                     fit: BoxFit.fill,
                   ),
                 ),
-                Padding(
+                const  Padding(
                   padding: const EdgeInsets.all(10),
                 )
               ],
@@ -69,7 +62,7 @@ class _MachinesViewState extends State<MachinesView> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   (machineData as Map)['equipment'],
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                  style: const  TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
               ),
               Card(
@@ -78,11 +71,10 @@ class _MachinesViewState extends State<MachinesView> {
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Text(
-                      (machineData as Map)['description'],
-                      style: TextStyle(fontSize: 20),
+                      (machineData )['description'],
+                      style:  const TextStyle(fontSize: 20),
                     ),
                   )),
-              
             ],
           ),
         )),

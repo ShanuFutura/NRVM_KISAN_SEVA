@@ -9,7 +9,7 @@ class MachinesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceWidth = MediaQuery.of(context).size.width;
+    // final deviceWidth = MediaQuery.of(context).size.width;
     final machineId = ModalRoute.of(context)!.settings.arguments;
     final machineData =
         (Provider.of<HttpProviders>(context).machinesList as List)
@@ -23,9 +23,8 @@ class MachinesView extends StatelessWidget {
           pinned: true,
           expandedHeight: 300,
           flexibleSpace: FlexibleSpaceBar(
-            title: Text(
+            title:  const Text(
               '',
-              // '',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             background: Stack(
@@ -33,7 +32,6 @@ class MachinesView extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  // height: 301,
                   child: Image.network(
                     Dummies.rootUrlforImages +
                         'Images/' +

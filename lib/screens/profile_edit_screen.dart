@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:heartbeat/Widgets/ClickableContainer.dart';
-// import 'package:heartbeat/helpers/db_helper.dart';
-// import 'package:heartbeat/providers/db_helper.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   static const String routeName = 'doc Profile edit';
@@ -22,7 +19,6 @@ class _PatientProfilEditScreenState extends State<ProfileEditScreen> {
     final isValid = _formKey.currentState!.validate();
     if (isValid) {
       _formKey.currentState!.save();
-      // DBHelper.profUpdate(_name, _age, _gender!, _email, _phone);
     }
   }
 
@@ -92,23 +88,6 @@ class _PatientProfilEditScreenState extends State<ProfileEditScreen> {
                   ),
                 ),
               ),
-              // DropdownButton(
-              //     hint: const Text('gender'),
-              //     items: const [
-              //       DropdownMenuItem(
-              //         child: Text('male'),
-              //         value: 'male',
-              //       ),
-              //       DropdownMenuItem(
-              //         child: Text('female'),
-              //         value: 'female',
-              //       )
-              //     ],
-              //     onChanged: (val) {
-              //       setState(() {
-              //         _gender = val.toString();
-              //       });
-              //     }),
               TextFormField(
                 initialValue: 'mail id',
                 style: const TextStyle(color: Colors.black),
@@ -158,75 +137,10 @@ class _PatientProfilEditScreenState extends State<ProfileEditScreen> {
                   ),
                 ),
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //   children: [
-              //     Container(
-              //       width: 100,
-              //       child: TextFormField(
-              //         initialValue: 'Qualification',
-              //         style: const TextStyle(color: Colors.black),
-              //         key: const ValueKey('ql'),
-              //         validator: (v) {
-              //           if (v!.trim().isEmpty) {
-              //             return 'Qualification cannot be empty';
-              //           } else
-              //             return null;
-              //         },
-              //         onSaved: (vl) {
-              //           // _quali = vl!;
-              //         },
-              //         decoration: const InputDecoration(
-              //           labelText: 'Qualification',
-              //           labelStyle:
-              //               TextStyle(color: Colors.black, fontSize: 12),
-              //           enabledBorder: UnderlineInputBorder(
-              //             borderSide: BorderSide(color: Colors.black),
-              //           ),
-              //           focusedBorder: UnderlineInputBorder(
-              //             borderSide: BorderSide(color: Colors.black),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     Container(
-              //       width: 90,
-              //       child: TextFormField(
-              //         initialValue: 'xx',
-              //         keyboardType: TextInputType.number,
-              //         style: const TextStyle(color: Colors.black),
-              //         key: const ValueKey('ex'),
-              //         validator: (v) {
-              //           if (v!.trim().isEmpty) {
-              //             return 'experience cannot be empty';
-              //           } else if (v.trim().length > 2 || v == '0') {
-              //             return 'enter a valid experience';
-              //           }
-
-              //           return null;
-              //         },
-              //         onSaved: (v) {
-              //           // _age = v!;
-              //         },
-              //         decoration: const InputDecoration(
-              //           labelText: 'Eperience',
-              //           labelStyle:
-              //               TextStyle(color: Colors.black, fontSize: 12),
-              //           enabledBorder: UnderlineInputBorder(
-              //             borderSide: BorderSide(color: Colors.black),
-              //           ),
-              //           focusedBorder: UnderlineInputBorder(
-              //             borderSide: BorderSide(color: Colors.black),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(onPressed: trySubmit, child: Text('EDIT'))
+                  ElevatedButton(onPressed: trySubmit, child:  const Text('EDIT'))
                 ],
               ),
             ],

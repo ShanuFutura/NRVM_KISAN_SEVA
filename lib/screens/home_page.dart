@@ -2,9 +2,8 @@ import 'package:farmers_app/models/dummies.dart';
 import 'package:farmers_app/providers/http_providers.dart';
 import 'package:farmers_app/screens/crop_view.dart';
 import 'package:farmers_app/screens/faq_list.dart';
-// import 'package:farmers_app/screens/fertilizers_list_screen.dart';
+
 import 'package:farmers_app/screens/machinary_list_screen.dart';
-import 'package:farmers_app/screens/machines_view.dart';
 import 'package:farmers_app/screens/pesticides_and_fertilizers_list.dart';
 import 'package:farmers_app/widgets/farmers_drawer.dart';
 import 'package:flutter/material.dart';
@@ -18,28 +17,28 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
-    final deviceWidth = MediaQuery.of(context).size.width;
+    // final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: FarmersDrawer(),
+      drawer: const  FarmersDrawer(),
       appBar: AppBar(
-        title: Text('Farmers App'),
+        title:  const Text('Farmers App'),
         actions: [
-          Icon(Icons.thermostat),
+         const   Icon(Icons.thermostat),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding:  const EdgeInsets.all(8.0),
             child: Center(
               child: FutureBuilder(
                   future: Provider.of<HttpProviders>(context).weather(),
                   builder: (context, snap) {
                     if (snap.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return  const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else {
                       return Text(
                         Provider.of<HttpProviders>(context).temp.toString() +
                             '°C',
-                        style: TextStyle(fontSize: 20),
+                        style: const  TextStyle(fontSize: 20),
                       );
                     }
                   }),
@@ -51,7 +50,7 @@ class HomePage extends StatelessWidget {
         future: Provider.of<HttpProviders>(context).getCrops(),
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const  Center(
               child: CircularProgressIndicator(),
             );
           } else if (snap.hasData) {
@@ -72,23 +71,32 @@ class HomePage extends StatelessWidget {
                   child: ListView.builder(
                       itemCount: (snap.data as List).length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                Dummies.rootUrlforImages +
-                                    'Images/' +
-                                    (snap.data as dynamic)[index]['image']),
-                          ),
-                          title: Text((snap.data as dynamic)[index]['crop']),
-                          // subtitle: Text('test'),
-                          trailing: TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed(
-                                  CropView.routeName,
-                                  arguments: (snap.data as dynamic)[index]
-                                      ['crop_id']);
-                            },
-                            child: Text('view'),
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                             const   Divider(),
+                              ListTile(
+                                leading: CircleAvatar(
+                                  radius: 25,
+                                  backgroundImage: NetworkImage(Dummies
+                                          .rootUrlforImages +
+                                      'Images/' +
+                                      (snap.data as dynamic)[index]['image']),
+                                ),
+                                title:
+                                    Text((snap.data as dynamic)[index]['crop']),
+                                trailing: TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(
+                                        CropView.routeName,
+                                        arguments: (snap.data as dynamic)[index]
+                                            ['crop_id']);
+                                  },
+                                  child: const  Text('view'),
+                                ),
+                              ),
+                            ],
                           ),
                         );
                       }),
@@ -98,49 +106,36 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(MachinaryListScreen.routeName);
+                        },
+                        child: Container(
+                            height: deviceHeight * .05,
+                            child: Image.asset('assets/tools.png'))),
+                    GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushNamed(FAQList.routeName);
                       },
-                      child: CircleAvatar(
-                        radius: deviceHeight * .07,
-                        child: Icon(
-                          Icons.quiz,
-                          size: deviceHeight * .08,
-                        ),
+                      child: Icon(
+                        Icons.quiz,
+                        size: deviceHeight * .05,
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushNamed(MachinaryListScreen.routeName);
-                      },
-                      child: CircleAvatar(
-                        radius: deviceHeight * .07,
-                        child: Icon(
-                          Icons.precision_manufacturing,
-                          size: deviceHeight * .08,
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushNamed(PesticidesAndFertilizersList.routeName);
-                      },
-                      child: CircleAvatar(
-                        radius: deviceHeight * .07,
-                        child: Icon(
-                          Icons.sanitizer,
-                          size: deviceHeight * .08,
-                        ),
-                      ),
-                    ),
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                              PesticidesAndFertilizersList.routeName);
+                        },
+                        child: Container(
+                            height: deviceHeight * .05,
+                            child: Image.asset('assets/pesticide.png'))),
                   ],
                 ),
               ],
             );
           } else {
-            return Center(
+            return const Center(
               child: Text('Couldnt fetch data'),
             );
           }

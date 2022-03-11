@@ -78,6 +78,8 @@ flutter:
     - assets/crop.webp
     - assets/favicon.png
     - assets/thermo_icon.webp
+    - assets/pesticide.png
+    - assets/tools.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

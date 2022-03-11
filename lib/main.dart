@@ -2,7 +2,7 @@ import 'package:farmers_app/providers/http_providers.dart';
 import 'package:farmers_app/screens/admin_notifications.dart';
 import 'package:farmers_app/screens/crop_view.dart';
 import 'package:farmers_app/screens/faq_list.dart';
-// import 'package:farmers_app/screens/fertilizers_list_screen.dart';
+
 import 'package:farmers_app/screens/fertilizers_view.dart';
 import 'package:farmers_app/screens/home_page.dart';
 import 'package:farmers_app/screens/loading_screen.dart';
@@ -38,32 +38,30 @@ class MainClass extends StatelessWidget {
           future: rememberUser(),
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.waiting) {
-              return LoadingScreen();
+              return const  LoadingScreen();
             } else if (snap.connectionState == ConnectionState.done) {
               if (snap.data as bool) {
-                // Provider.of<HttpProviders>(context).weather();
-                return HomePage();
+                return const  HomePage();
               } else {
                 return Registration();
               }
             } else {
-              return LoadingScreen();
+              return const  LoadingScreen();
             }
           },
         ),
         routes: {
-          HomePage.routeName: (context) => HomePage(),
+          HomePage.routeName: (context) => const  HomePage(),
           Registration.routeName: (context) => Registration(),
           ProfileEditScreen.routeName: (context) => ProfileEditScreen(),
           CropView.routeName: (context) => CropView(),
-          // FertilizersListScreen.routeName: (context) => FertilizersListScreen(),
-          MachinaryListScreen.routeName: (context) => MachinaryListScreen(),
+          MachinaryListScreen.routeName: (context) =>  const MachinaryListScreen(),
           FertilizersView.routeName: (context) => FertilizersView(),
           MachinesView.routeName: (context) => MachinesView(),
-          FAQList.routeName: (context) => FAQList(),
-          AdminNotifications.routeName: (context) => AdminNotifications(),
+          FAQList.routeName: (context) =>  const FAQList(),
+          AdminNotifications.routeName: (context) =>  const AdminNotifications(),
           PesticidesAndFertilizersList.routeName: (context) =>
-              PesticidesAndFertilizersList(),
+               const PesticidesAndFertilizersList(),
         },
       ),
     );

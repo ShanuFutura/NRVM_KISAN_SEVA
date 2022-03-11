@@ -1,4 +1,3 @@
-import 'package:farmers_app/models/dummies.dart';
 import 'package:farmers_app/providers/http_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -30,22 +29,22 @@ class _FAQListState extends State<FAQList> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceWidth = MediaQuery.of(context).size.width;
+    // final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: Text('FAQ'),
+        title: const  Text('FAQ'),
       ),
       body: FutureBuilder(
           future: Provider.of<HttpProviders>(context).getFAQList(),
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.waiting) {
-              return Center(
+              return  const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (snap.hasData) {
               if ((snap.data as dynamic)[0]['message'] == 'failed') {
-                return Center(
+                return  const Center(
                   child: Text('No Chats yet'),
                 );
               } else {
@@ -80,7 +79,7 @@ class _FAQListState extends State<FAQList> {
                                   : Theme.of(context).primaryColorLight,
                               elevation: 5,
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(15.0),
                                 child: Text(
                                     (snap.data as dynamic)[index]['doubt']),
                               ),
@@ -102,7 +101,7 @@ class _FAQListState extends State<FAQList> {
                 );
               }
             } else {
-              return Center(
+              return const  Center(
                 child: Text('something went wrong'),
               );
             }
@@ -124,16 +123,14 @@ class _FAQListState extends State<FAQList> {
                   isSending = false;
                   Fluttertoast.showToast(
                       msg: succeed ? 'sent' : 'couldn\'t send');
-                  if (succeed) {
-                    // Dummies.faqList.add(faquestion);
-                  }
+                  if (succeed) {}
                   faquestion = '';
                   faqController.clear();
                   FocusScope.of(context).unfocus();
                 });
               },
         child: isSending
-            ? CircleAvatar(
+            ?  const CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage('assets/step2_sending.gif'))
             : Icon(
@@ -145,15 +142,15 @@ class _FAQListState extends State<FAQList> {
           child: BottomAppBar(
             notchMargin: 10,
             color: Theme.of(context).primaryColor,
-            shape: CircularNotchedRectangle(),
+            shape: const  CircularNotchedRectangle(),
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding:  const EdgeInsets.all(8.0),
               child: Container(
                 height: 50,
                 child: TextFormField(
                   controller: faqController,
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
+                  style:  const TextStyle(color: Colors.white),
+                  decoration: const  InputDecoration(
                     fillColor: Colors.white,
                     hintText: 'type your doubts',
                   ),

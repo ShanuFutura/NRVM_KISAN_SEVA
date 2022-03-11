@@ -5,7 +5,7 @@ class FertilizersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceWidth = MediaQuery.of(context).size.width;
+    // final deviceWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: CustomScrollView(slivers: [
@@ -13,7 +13,7 @@ class FertilizersView extends StatelessWidget {
           pinned: true,
           expandedHeight: 300,
           flexibleSpace: FlexibleSpaceBar(
-            title: Text(
+            title:  const Text(
               'Fertlizer name',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
@@ -22,13 +22,12 @@ class FertilizersView extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  // height: 301,
                   child: Image.asset(
                     'assets/fertilizer.jpg',
                     fit: BoxFit.fitWidth,
                   ),
                 ),
-                Padding(
+                const  Padding(
                   padding: const EdgeInsets.all(10),
                 )
               ],
@@ -40,9 +39,9 @@ class FertilizersView extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+            children: const  [
+                Padding(
+                padding:  EdgeInsets.all(8.0),
                 child: Text(
                   'Title',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

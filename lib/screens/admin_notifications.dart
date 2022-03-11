@@ -1,4 +1,3 @@
-import 'package:farmers_app/models/dummies.dart';
 import 'package:farmers_app/providers/http_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,13 +10,13 @@ class AdminNotifications extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FAQ'),
+        title: const Text('Admin notifications'),
       ),
       body: FutureBuilder(
         future: Provider.of<HttpProviders>(context).getNotifications(),
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else {
@@ -31,16 +30,18 @@ class AdminNotifications extends StatelessWidget {
                     child: Card(
                       elevation: 5,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child:
-                            Text((snap.data as dynamic)[index]['notification']),
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          (snap.data as dynamic)[index]['notification'],
+                          style:  const TextStyle(fontSize: 17),
+                        ),
                       ),
                     ),
                   );
                 },
               );
             } else {
-              return Center(
+              return const Center(
                 child: Text('Couldn\'t fetch data'),
               );
             }
