@@ -175,8 +175,9 @@ class HttpProviders extends ChangeNotifier {
   }
 
   Future<bool> getConnectivityStatus() async {
+    print('called');
     var connectivityResult = await (Connectivity().checkConnectivity());
     print(connectivityResult);
-    return (connectivityResult == ConnectionState.none);
+    return (connectivityResult == ConnectivityResult.none);
   }
 }

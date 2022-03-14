@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('Turn on Data'),
+                content: Text('Consider turning data on'),
               );
             });
       }
