@@ -16,30 +16,50 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<HttpProviders>(context).getConnectivityStatus().then((value) {
+      print(value);
+      if (value) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Turn on Data'),
+              );
+            });
+      }
+    });
     final deviceHeight = MediaQuery.of(context).size.height;
     // final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: const  FarmersDrawer(),
+      drawer: const FarmersDrawer(),
       appBar: AppBar(
-        title:  const Text('Farmers App'),
+        title: const Text('Farmers App'),
         actions: [
-         const   Icon(Icons.thermostat),
           Padding(
-            padding:  const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Center(
               child: FutureBuilder(
-                  future: Provider.of<HttpProviders>(context).weather(),
+                  future: Provider.of<HttpProviders>(context).getSensorData(),
                   builder: (context, snap) {
                     if (snap.connectionState == ConnectionState.waiting) {
-                      return  const Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else {
-                      return Text(
-                        Provider.of<HttpProviders>(context).temp.toString() +
-                            '°C',
-                        style: const  TextStyle(fontSize: 20),
-                      );
+                      return GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: Text(
+                                        Provider.of<HttpProviders>(context)
+                                            .weatherStatus),
+                                  );
+                                });
+                          },
+                          child:
+                              Provider.of<HttpProviders>(context).WeatherIcon);
                     }
                   }),
             ),
@@ -50,7 +70,7 @@ class HomePage extends StatelessWidget {
         future: Provider.of<HttpProviders>(context).getCrops(),
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.waiting) {
-            return const  Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snap.hasData) {
@@ -75,7 +95,7 @@ class HomePage extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
-                             const   Divider(),
+                              const Divider(),
                               ListTile(
                                 leading: CircleAvatar(
                                   radius: 25,
@@ -93,7 +113,7 @@ class HomePage extends StatelessWidget {
                                         arguments: (snap.data as dynamic)[index]
                                             ['crop_id']);
                                   },
-                                  child: const  Text('view'),
+                                  child: const Text('view'),
                                 ),
                               ),
                             ],

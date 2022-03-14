@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:farmers_app/models/dummies.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,8 +11,8 @@ class HttpProviders extends ChangeNotifier {
   var cropsList;
   var machinesList;
   var notifications;
-  var temp;
-  var humidity;
+  var temp = 0.0;
+  var humidity = 0.0;
 
   Future<bool> farmerLogin(String username, String password) async {
     final pref = await SharedPreferences.getInstance();
@@ -122,13 +124,59 @@ class HttpProviders extends ChangeNotifier {
     return jsonDecode(res.body);
   }
 
-  Future<dynamic> weather() async {
+  // Future<dynamic> weather() async {
+  //   final pref = await SharedPreferences.getInstance();
+  //   final res = await post(Uri.parse(Dummies.rootUrl + 'iot.php'), body: {
+  //     'farmer_id': pref.getString('farmerId'),
+  //   });
+  //   print('Temperature' + res.body);
+  //   temp = jsonDecode(res.body)['temparature'];
+  //   humidity = jsonDecode(res.body)['humidity'];
+  // }
+
+  String get weatherStatus {
+    if (temp > 30 || humidity < 50) {
+      return 'too hot consider irrigating';
+    } else if (temp < 20 && humidity > 70) {
+      return 'No need for further irrigation';
+    } else {
+      return 'Normal irrigation needed';
+    }
+  }
+
+  Widget get WeatherIcon {
+    if (temp > 35 || humidity < 30) {
+      return Icon(Icons.wb_sunny);
+    } else if (temp < 30 && humidity > 50) {
+      return Icon(Icons.water_drop);
+    } else {
+      return Icon(Icons.thermostat);
+      ;
+    }
+  }
+
+  Future<dynamic> getSensorData() async {
+    final url = Uri.parse(
+        'https://api.thingspeak.com/channels/1672889/feeds.json?api_key=DAUOVF9HSVX6NS3A&results=2');
+    final res = await get(url);
+    print(res.body);
+    temp =
+        double.parse(((jsonDecode(res.body))['feeds'] as List).last['field1']);
+    humidity =
+        double.parse(((jsonDecode(res.body))['feeds'] as List).last['field2']);
+    print(temp.toString() + humidity.toString());
+  }
+
+  Future<dynamic> getRequestStatus() async {
     final pref = await SharedPreferences.getInstance();
-    final res = await post(Uri.parse(Dummies.rootUrl + 'iot.php'), body: {
-      'farmer_id': pref.getString('farmerId'),
-    });
-    print('TEmperature' + res.body);
-    temp = jsonDecode(res.body)['temparature'];
-    humidity = jsonDecode(res.body)['humidity'];
+    final res = await post(Uri.parse(Dummies.rootUrl + 'request_status.php'),
+        body: {'farmer_id': pref.getString('farmerId')});
+    return jsonDecode(res.body);
+  }
+
+  Future<bool> getConnectivityStatus() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    print(connectivityResult);
+    return (connectivityResult == ConnectionState.none);
   }
 }

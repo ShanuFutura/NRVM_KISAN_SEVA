@@ -38,30 +38,33 @@ class MainClass extends StatelessWidget {
           future: rememberUser(),
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.waiting) {
-              return const  LoadingScreen();
+              return const LoadingScreen();
             } else if (snap.connectionState == ConnectionState.done) {
               if (snap.data as bool) {
-                return const  HomePage();
+                Provider.of<HttpProviders>(context).getSensorData();
+                Provider.of<HttpProviders>(context).getConnectivityStatus();
+                return const HomePage();
               } else {
                 return Registration();
               }
             } else {
-              return const  LoadingScreen();
+              return const LoadingScreen();
             }
           },
         ),
         routes: {
-          HomePage.routeName: (context) => const  HomePage(),
+          HomePage.routeName: (context) => const HomePage(),
           Registration.routeName: (context) => Registration(),
           ProfileEditScreen.routeName: (context) => ProfileEditScreen(),
           CropView.routeName: (context) => CropView(),
-          MachinaryListScreen.routeName: (context) =>  const MachinaryListScreen(),
+          MachinaryListScreen.routeName: (context) =>
+              const MachinaryListScreen(),
           FertilizersView.routeName: (context) => FertilizersView(),
           MachinesView.routeName: (context) => MachinesView(),
-          FAQList.routeName: (context) =>  const FAQList(),
-          AdminNotifications.routeName: (context) =>  const AdminNotifications(),
+          FAQList.routeName: (context) => const FAQList(),
+          AdminNotifications.routeName: (context) => const AdminNotifications(),
           PesticidesAndFertilizersList.routeName: (context) =>
-               const PesticidesAndFertilizersList(),
+              const PesticidesAndFertilizersList(),
         },
       ),
     );

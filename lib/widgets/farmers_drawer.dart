@@ -1,5 +1,4 @@
-
-
+import 'package:farmers_app/providers/http_providers.dart';
 import 'package:farmers_app/screens/admin_notifications.dart';
 import 'package:farmers_app/screens/faq_list.dart';
 
@@ -8,6 +7,7 @@ import 'package:farmers_app/screens/pesticides_and_fertilizers_list.dart';
 import 'package:farmers_app/screens/profile_edit_screen.dart';
 import 'package:farmers_app/screens/registration.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FarmersDrawer extends StatelessWidget {
@@ -16,82 +16,109 @@ class FarmersDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.white,
       child: Column(
         children: [
-          Container(
-            width: double.infinity,
-            child: Padding(
-              padding: const  EdgeInsets.symmetric(vertical: 40),
-              child: Center(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(ProfileEditScreen.routeName);
-                  },
-                  child: CircleAvatar(
-                    radius: 80,
-                    child: Stack(
-                      alignment: Alignment.bottomRight,
+          SafeArea(
+            child: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/weather.png'),
+                      fit: BoxFit.scaleDown)),
+              height: 200,
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                        Image.asset(
-                          'assets/thermo_icon.webp',
-                        ),
-                       const   Positioned(
-                          top: 100,
-                          left: 90,
+                        TextButton.icon(
+                            onPressed: () {},
+                            icon: const Icon(Icons.thermostat),
+                            label: Text(
+                                '${Provider.of<HttpProviders>(context).temp.toInt()}°C')),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        TextButton.icon(
+                            onPressed: () {},
+                            icon: const Icon(Icons.water_drop),
+                            label: Text(
+                                '${Provider.of<HttpProviders>(context).humidity.toInt()}%')),
+                      ],
+                    ),
+                    Expanded(child: Container()),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            '30°C',
-                            style: TextStyle(fontSize: 25),
+                            Provider.of<HttpProviders>(context).weatherStatus,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
           ),
-          const  Divider(),
+          const Divider(),
           ListTile(
-            title: const  Text('View available machines'),
-            trailing: const  Icon(Icons.precision_manufacturing),
+            title: const Text('Profile edit'),
+            trailing: const Icon(Icons.account_circle),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(ProfileEditScreen.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            title: const Text('View available machines'),
+            trailing: const Icon(Icons.precision_manufacturing),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(MachinaryListScreen.routeName);
             },
           ),
-          const  Divider(),
+          const Divider(),
           ListTile(
-            title:  const Text('Admin notifications'),
-            trailing:  const Icon(Icons.notifications),
+            title: const Text('Admin notifications'),
+            trailing: const Icon(Icons.notifications),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(AdminNotifications.routeName);
             },
           ),
-          const  Divider(),
+          const Divider(),
           ListTile(
-            title: const  Text('contact support team'),
-            trailing: const  Icon(Icons.support_agent),
+            title: const Text('contact support team'),
+            trailing: const Icon(Icons.support_agent),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(FAQList.routeName);
             },
           ),
-          const  Divider(),
+          const Divider(),
           ListTile(
-            title: const  Text('Pesticides & Fertilizers'),
-            trailing:  const Icon(Icons.sanitizer),
+            title: const Text('Pesticides & Fertilizers'),
+            trailing: const Icon(Icons.sanitizer),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context)
                   .pushNamed(PesticidesAndFertilizersList.routeName);
             },
           ),
-          const  Divider(),
+          const Divider(),
           ListTile(
-            title: const  Text('Logout'),
-            trailing:  const Icon(Icons.logout),
+            title: const Text('Logout'),
+            trailing: const Icon(Icons.logout),
             onTap: () async {
               Navigator.of(context).pop();
               final pref = await SharedPreferences.getInstance();
@@ -101,7 +128,7 @@ class FarmersDrawer extends StatelessWidget {
                   .pushReplacementNamed(Registration.routeName);
             },
           ),
-           const Divider(),
+          const Divider(),
         ],
       ),
     );
