@@ -16,7 +16,7 @@ class MachineRequestStatus extends StatelessWidget {
           future: Provider.of<HttpProviders>(context).getRequestStatus(),
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else {
@@ -39,7 +39,7 @@ class MachineRequestStatus extends StatelessWidget {
                         ListTile(
                           leading: Text(
                             (snap.data as dynamic)[index]['equipment'],
-                            style: TextStyle(fontSize: 15),
+                            style: const TextStyle(fontSize: 15),
                           ),
                           trailing: Text(
                             stat,

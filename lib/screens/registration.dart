@@ -34,7 +34,7 @@ class _RegistrationState extends State<Registration> {
       fkey.currentState!.save();
       var succeed;
       if (isLogin) {
-        print('passing: ' + username + password);
+        // print('passing: ' + username + password);
         succeed = await Provider.of<HttpProviders>(context, listen: false)
             .farmerLogin(username, password);
         setState(() {

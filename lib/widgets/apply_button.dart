@@ -25,7 +25,7 @@ class _ApplyButtonState extends State<ApplyButton> {
             .getRequestStatusForButton(widget.machineId.toString()),
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else {
@@ -57,7 +57,7 @@ class _ApplyButtonState extends State<ApplyButton> {
                       ),
                 label: Text(
                   snap.data as String,
-                  style: TextStyle(fontSize: 25),
+                  style:const TextStyle(fontSize: 25),
                 ));
           }
         });

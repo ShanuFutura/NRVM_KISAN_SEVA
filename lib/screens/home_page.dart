@@ -17,12 +17,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<HttpProviders>(context).getConnectivityStatus().then((value) {
-      print(value);
+      // print(value);
       if (value) {
         showDialog(
             context: context,
             builder: (context) {
-              return AlertDialog(
+              return const AlertDialog(
                 content: Text('Consider turning data on'),
               );
             });
@@ -59,7 +59,7 @@ class HomePage extends StatelessWidget {
                                 });
                           },
                           child:
-                              Provider.of<HttpProviders>(context).WeatherIcon);
+                              Provider.of<HttpProviders>(context).weatherIcon);
                     }
                   }),
             ),

@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class FeedBackScreen extends StatefulWidget {
-  FeedBackScreen({Key? key}) : super(key: key);
+  const FeedBackScreen({Key? key}) : super(key: key);
 
   static const String routeName = 'feedback screen';
 
@@ -22,7 +22,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Feedback'),
+        title: const Text('Feedback'),
       ),
       body: Column(
         children: [
@@ -30,7 +30,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
             padding: const EdgeInsets.all(10),
             child: Container(
               color: Colors.grey.withOpacity(.5),
-              padding: EdgeInsets.all(5),
+              padding:const EdgeInsets.all(5),
               child: TextField(
                 controller: feedController,
                 maxLines: 15,
@@ -57,7 +57,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
             showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return AlertDialog(
+                  return const AlertDialog(
                     title: Text('Couldn\'t send feedback'),
                   );
                 });
@@ -65,7 +65,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
 
           // feedController.clear();
         },
-        child: isLoading ? CircularProgressIndicator() : Icon(Icons.send),
+        child: isLoading ? const CircularProgressIndicator() :const Icon(Icons.send),
       ),
     );
   }

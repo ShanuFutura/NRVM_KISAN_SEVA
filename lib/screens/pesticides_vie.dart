@@ -14,8 +14,8 @@ class MachinesView extends StatelessWidget {
     final machineData =
         (Provider.of<HttpProviders>(context).machinesList as List)
             .firstWhere((element) => element['equipment_id'] == machineId);
-    print('machine Id' + machineId.toString());
-    print('machineData' + machineData.toString());
+    // print('machine Id' + machineId.toString());
+    // print('machineData' + machineData.toString());
 
     return Scaffold(
       body: CustomScrollView(slivers: [
@@ -23,7 +23,7 @@ class MachinesView extends StatelessWidget {
           pinned: true,
           expandedHeight: 300,
           flexibleSpace: FlexibleSpaceBar(
-            title:  const Text(
+            title: const Text(
               '',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
@@ -39,9 +39,7 @@ class MachinesView extends StatelessWidget {
                     fit: BoxFit.fill,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                )
+                
               ],
             ),
           ),
@@ -56,10 +54,10 @@ class MachinesView extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   (machineData as Map)['equipment'],
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style:const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
-              Text((machineData as Map)['description']),
+              Text(machineData ['description']),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

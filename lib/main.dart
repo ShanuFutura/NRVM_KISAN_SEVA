@@ -24,7 +24,7 @@ class MainClass extends StatelessWidget {
 
   Future<bool> rememberUser() async {
     final pref = await SharedPreferences.getInstance();
-    print((pref.getBool('isLogged')) ?? false.toString());
+    // print((pref.getBool('isLogged')) ?? false.toString());
     return (pref.getBool('isLogged')) ?? false;
   }
 

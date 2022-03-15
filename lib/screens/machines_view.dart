@@ -20,8 +20,8 @@ class _MachinesViewState extends State<MachinesView> {
     final machineData =
         (Provider.of<HttpProviders>(context).machinesList as List)
             .firstWhere((element) => element['equipment_id'] == machineId);
-    print('machine Id' + machineId.toString());
-    print('machineData' + machineData.toString());
+    // print('machine Id' + machineId.toString());
+    // print('machineData' + machineData.toString());
 
     return Scaffold(
       body: CustomScrollView(slivers: [
@@ -46,7 +46,7 @@ class _MachinesViewState extends State<MachinesView> {
                   ),
                 ),
                 const  Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding:  EdgeInsets.all(10),
                 )
               ],
             ),
