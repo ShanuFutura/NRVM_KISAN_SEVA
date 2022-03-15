@@ -24,22 +24,27 @@ class PesticidesAndFertilizersList extends StatelessWidget {
             return ListView.builder(
                 itemCount: (snap.data as List).length,
                 itemBuilder: ((context, index) {
-                  return ListTile(
-                    onTap: () {},
-                    title: Text((snap.data as dynamic)[index]['name']),
-                    trailing: TextButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title:  const Text('Details'),
-                                  content: Text((snap.data as dynamic)[index]
-                                      ['description']),
-                                );
-                              });
-                        },
-                        child:  const Text('View')),
+                  return Column(
+                    children: [
+                      ListTile(
+                        onTap: () {},
+                        title: Text((snap.data as dynamic)[index]['name']),
+                        trailing: TextButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title:  const Text('Details'),
+                                      content: Text((snap.data as dynamic)[index]
+                                          ['description']),
+                                    );
+                                  });
+                            },
+                            child:  const Text('View')),
+                      ),
+                      const Divider()
+                    ],
                   );
                 }));
           } else {

@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
     final deviceHeight = MediaQuery.of(context).size.height;
     // final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: const FarmersDrawer(),
+      drawer:  FarmersDrawer(),
       appBar: AppBar(
         title: const Text('Farmers App'),
         actions: [

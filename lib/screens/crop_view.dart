@@ -21,7 +21,8 @@ class CropView extends StatelessWidget {
           pinned: true,
           expandedHeight: 300,
           flexibleSpace: FlexibleSpaceBar(
-            title: Text(
+            title:
+             Text(
               (cropData as Map)['crop'],
               style:  const TextStyle(color: Colors.white, fontSize: 20),
             ),

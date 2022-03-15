@@ -13,6 +13,7 @@ class HttpProviders extends ChangeNotifier {
   var notifications;
   var temp = 0.0;
   var humidity = 0.0;
+  // var seenNotiCount;
 
   Future<bool> farmerLogin(String username, String password) async {
     final pref = await SharedPreferences.getInstance();
@@ -112,7 +113,7 @@ class HttpProviders extends ChangeNotifier {
   Future<dynamic> getPesticides() async {
     final res = await get(Uri.parse(Dummies.rootUrl + 'pesticide_list.php'));
     print('pesticides : ' + res.body);
-    notifications = jsonDecode(res.body);
+    // notifications = jsonDecode(res.body);
     return jsonDecode(res.body);
   }
 
@@ -171,6 +172,7 @@ class HttpProviders extends ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
     final res = await post(Uri.parse(Dummies.rootUrl + 'request_status.php'),
         body: {'farmer_id': pref.getString('farmerId')});
+    print(res.body);
     return jsonDecode(res.body);
   }
 
@@ -179,5 +181,34 @@ class HttpProviders extends ChangeNotifier {
     var connectivityResult = await (Connectivity().checkConnectivity());
     print(connectivityResult);
     return (connectivityResult == ConnectivityResult.none);
+  }
+
+  Future<String> getRequestStatusForButton(String equipmentId) async {
+    final pref = await SharedPreferences.getInstance();
+    final res = await post(Uri.parse(Dummies.rootUrl + 'status.php'), body: {
+      'farmer_id': pref.getString('farmerId'),
+      'equipment_id': equipmentId
+    });
+    print(res.body);
+    if (jsonDecode(res.body)['status'] == '0') {
+      return 'Pending';
+    } else if (jsonDecode(res.body)['status'] == '1') {
+      return 'Accepted';
+    } else if (jsonDecode(res.body)['status'] == '2') {
+      return 'Rejected';
+    } else {
+      return 'Apply';
+    }
+    // return jsonDecode(res.body);
+  }
+
+  Future<bool> feedBackSend(String feed) async {
+    final pref = await SharedPreferences.getInstance();
+    final res = await post(Uri.parse(Dummies.rootUrl + 'feedback.php'), body: {
+      'farmer_id': pref.getString('farmerId'),
+      'feedback': feed,
+    });
+    final resText = jsonDecode(jsonEncode(res.body));
+    return (resText.toString().trim() == 'added') ;
   }
 }

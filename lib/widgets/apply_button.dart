@@ -20,34 +20,46 @@ var isLoading = false;
 class _ApplyButtonState extends State<ApplyButton> {
   @override
   Widget build(BuildContext context) {
-    return TextButton.icon(
-        onPressed: () async {
-          setState(() {
-            isLoading = true;
-          });
-          final applied =
-              await Provider.of<HttpProviders>(context, listen: false)
-                  .applyForMachine(widget.machineId as String);
-          setState(() {
-            isLoading = false;
-          });
-          if (applied) {
-            Fluttertoast.showToast(msg: 'applied');
+    return FutureBuilder(
+        future: Provider.of<HttpProviders>(context)
+            .getRequestStatusForButton(widget.machineId.toString()),
+        builder: (context, snap) {
+          if (snap.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           } else {
-            Fluttertoast.showToast(msg: 'something went wrong try again');
+            return TextButton.icon(
+                onPressed: snap.data as String=='Apply'? () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  final applied =
+                      await Provider.of<HttpProviders>(context, listen: false)
+                          .applyForMachine(widget.machineId as String);
+                  setState(() {
+                    isLoading = false;
+                  });
+                  if (applied) {
+                    Fluttertoast.showToast(msg: 'applied');
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: 'something went wrong try again');
+                  }
+                }:null,
+                icon: isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : const Icon(
+                        Icons.unarchive,
+                        size: 40,
+                      ),
+                label: Text(
+                  snap.data as String,
+                  style: TextStyle(fontSize: 25),
+                ));
           }
-        },
-        icon: isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : const Icon(
-                Icons.unarchive,
-                size: 40,
-              ),
-        label: const Text(
-          'Apply',
-          style: TextStyle(fontSize: 25),
-        ));
+        });
   }
 }

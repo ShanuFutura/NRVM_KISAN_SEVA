@@ -2,11 +2,13 @@ import 'package:farmers_app/providers/http_providers.dart';
 import 'package:farmers_app/screens/admin_notifications.dart';
 import 'package:farmers_app/screens/crop_view.dart';
 import 'package:farmers_app/screens/faq_list.dart';
+import 'package:farmers_app/screens/feedback_screen.dart';
 
-import 'package:farmers_app/screens/fertilizers_view.dart';
+// import 'package:farmers_app/screens/fertilizers_view.dart';
 import 'package:farmers_app/screens/home_page.dart';
 import 'package:farmers_app/screens/loading_screen.dart';
 import 'package:farmers_app/screens/machinary_list_screen.dart';
+import 'package:farmers_app/screens/machine_request_status.dart';
 import 'package:farmers_app/screens/machines_view.dart';
 import 'package:farmers_app/screens/pesticides_and_fertilizers_list.dart';
 import 'package:farmers_app/screens/profile_edit_screen.dart';
@@ -43,6 +45,7 @@ class MainClass extends StatelessWidget {
               if (snap.data as bool) {
                 Provider.of<HttpProviders>(context).getSensorData();
                 Provider.of<HttpProviders>(context).getConnectivityStatus();
+
                 return const HomePage();
               } else {
                 return Registration();
@@ -59,12 +62,14 @@ class MainClass extends StatelessWidget {
           CropView.routeName: (context) => CropView(),
           MachinaryListScreen.routeName: (context) =>
               const MachinaryListScreen(),
-          FertilizersView.routeName: (context) => FertilizersView(),
+          // FertilizersView.routeName: (context) => FertilizersView(),
           MachinesView.routeName: (context) => MachinesView(),
           FAQList.routeName: (context) => const FAQList(),
           AdminNotifications.routeName: (context) => const AdminNotifications(),
           PesticidesAndFertilizersList.routeName: (context) =>
               const PesticidesAndFertilizersList(),
+          MachineRequestStatus.routeName: (context) => MachineRequestStatus(),
+          FeedBackScreen.routeName: (context) => FeedBackScreen(),
         },
       ),
     );
