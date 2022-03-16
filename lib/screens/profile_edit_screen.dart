@@ -111,7 +111,7 @@ class _PatientProfilEditScreenState extends State<ProfileEditScreen> {
                 ),
               ),
               TextFormField(
-                initialValue: 'pmob',
+                initialValue: 'mobile number',
                 keyboardType: TextInputType.number,
                 style: const TextStyle(color: Colors.black),
                 key: const ValueKey('mob'),
@@ -140,7 +140,8 @@ class _PatientProfilEditScreenState extends State<ProfileEditScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(onPressed: trySubmit, child:  const Text('EDIT'))
+                  ElevatedButton(
+                      onPressed: trySubmit, child: const Text('EDIT'))
                 ],
               ),
             ],

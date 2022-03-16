@@ -13,10 +13,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FarmersDrawer extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
-  
     return Drawer(
       backgroundColor: Colors.white,
       child: SingleChildScrollView(
@@ -31,7 +29,8 @@ class FarmersDrawer extends StatelessWidget {
                 height: 200,
                 width: double.infinity,
                 child: Padding(
-                  padding:const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -73,15 +72,15 @@ class FarmersDrawer extends StatelessWidget {
               ),
             ),
             const Divider(),
-            ListTile(
-              title: const Text('Profile edit'),
-              trailing: const Icon(Icons.account_circle),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed(ProfileEditScreen.routeName);
-              },
-            ),
-            const Divider(),
+            // ListTile(
+            //   title: const Text('Profile edit'), 
+            //   trailing: const Icon(Icons.account_circle),
+            //   onTap: () {
+            //     Navigator.of(context).pop();
+            //     Navigator.of(context).pushNamed(ProfileEditScreen.routeName);
+            //   },
+            // ),
+            // const Divider(),
             ListTile(
               title: const Text('Machine requests'),
               trailing: const Icon(Icons.unarchive),
@@ -133,8 +132,7 @@ class FarmersDrawer extends StatelessWidget {
               trailing: const Icon(Icons.feedback),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context)
-                    .pushNamed(FeedBackScreen.routeName);
+                Navigator.of(context).pushNamed(FeedBackScreen.routeName);
               },
             ),
             const Divider(),
