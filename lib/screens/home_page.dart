@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
     final deviceHeight = MediaQuery.of(context).size.height;
     // final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer:  FarmersDrawer(),
+      drawer: FarmersDrawer(),
       appBar: AppBar(
         title: const Text('Farmers App'),
         actions: [
@@ -58,8 +58,14 @@ class HomePage extends StatelessWidget {
                                   );
                                 });
                           },
-                          child:
-                              Provider.of<HttpProviders>(context).weatherIcon);
+                          child: StreamBuilder(
+                              stream: Stream.periodic(Duration(seconds: 1)),
+                              builder: (context, snap) {
+                                Provider.of<HttpProviders>(context)
+                                    .getSensorData();
+                                return Provider.of<HttpProviders>(context)
+                                    .weatherIcon;
+                              }));
                     }
                   }),
             ),

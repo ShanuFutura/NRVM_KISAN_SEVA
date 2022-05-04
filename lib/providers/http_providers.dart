@@ -70,7 +70,7 @@ class HttpProviders extends ChangeNotifier {
   Future<dynamic> getMachines() async {
     // print('getting');
     final res = await get(Uri.parse(Dummies.rootUrl + 'machine_list.php'));
-    // print('machines' + res.body);
+    print('machines' + res.body);
     machinesList = jsonDecode(res.body);
     return jsonDecode(res.body);
   }
@@ -136,7 +136,7 @@ class HttpProviders extends ChangeNotifier {
   // }
 
   String get weatherStatus {
-    if (temp > 30 || humidity < 50) {
+    if (temp > 34 && humidity < 60) {
       return 'too hot consider irrigating';
     } else if (temp < 25 && humidity > 70) {
       return 'No need for further irrigation';
@@ -146,19 +146,18 @@ class HttpProviders extends ChangeNotifier {
   }
 
   Widget get weatherIcon {
-    if (temp > 30 || humidity < 50) {
+    if (temp > 34 && humidity < 60) {
       return const Icon(Icons.wb_sunny);
     } else if (temp < 25 && humidity > 70) {
       return const Icon(Icons.water_drop);
     } else {
       return const Icon(Icons.thermostat);
-      
     }
   }
 
   Future<dynamic> getSensorData() async {
-    final url = Uri.parse(
-        'https://api.thingspeak.com/channels/1672889/feeds.json?api_key=DAUOVF9HSVX6NS3A&results=2');
+    print('getting');
+    final url = Uri.parse(Dummies.iotDataUrl);
     final res = await get(url);
     // print(res.body);
     temp =

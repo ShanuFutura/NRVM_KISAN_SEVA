@@ -1,5 +1,3 @@
-
-
 import 'package:farmers_app/providers/http_providers.dart';
 import 'package:farmers_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +53,7 @@ class _RegistrationState extends State<Registration> {
         showDialog(
             context: context,
             builder: (context) {
-              return const  AlertDialog(
+              return const AlertDialog(
                 title: Text('Couldn\'t login'),
                 content: Text('Something went wrong'),
               );
@@ -69,182 +67,192 @@ class _RegistrationState extends State<Registration> {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Center(
-        child: Form(
-          key: fkey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                height: isLogin ? deviceHeight * .3 : deviceHeight * .5,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    if (!isLogin)
-                      Container(
-                        key: const  Key('name'),
-                        width: deviceWidth * .8,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const  Color.fromARGB(125, 0, 128, 32)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 2, horizontal: 15),
-                          child: TextFormField(
-                            keyboardType: TextInputType.name,
-                            textCapitalization: TextCapitalization.words,
-                            decoration: const InputDecoration(
-                              hintText: 'name',
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Form(
+              key: fkey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    height: 100,
+                  ),
+                  Container(
+                    height: isLogin ? deviceHeight * .3 : deviceHeight * .5,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        if (!isLogin)
+                          Container(
+                            key: const Key('name'),
+                            width: deviceWidth * .8,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: const Color.fromARGB(125, 0, 128, 32)),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 2, horizontal: 15),
+                              child: TextFormField(
+                                keyboardType: TextInputType.name,
+                                textCapitalization: TextCapitalization.words,
+                                decoration: const InputDecoration(
+                                  hintText: 'name',
+                                ),
+                                validator: (v) {
+                                  if (v!.trim().isEmpty) {
+                                    return 'name cannot be empty';
+                                  }
+                                },
+                                onSaved: (v) {
+                                  name = v;
+                                },
+                              ),
                             ),
-                            validator: (v) {
-                              if (v!.trim().isEmpty) {
-                                return 'name cannot be empty';
-                              }
-                            },
-                            onSaved: (v) {
-                              name = v;
-                            },
                           ),
-                        ),
-                      ),
-                    if (!isLogin)
-                      Container(
-                        key:  const Key('mail'),
-                        width: deviceWidth * .8,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color:  const Color.fromARGB(125, 0, 128, 32)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 2, horizontal: 15),
-                          child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: const  InputDecoration(
-                              hintText: 'email',
+                        if (!isLogin)
+                          Container(
+                            key: const Key('mail'),
+                            width: deviceWidth * .8,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: const Color.fromARGB(125, 0, 128, 32)),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 2, horizontal: 15),
+                              child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: const InputDecoration(
+                                  hintText: 'email',
+                                ),
+                                validator: (v) {
+                                  if (v!.trim().isEmpty) {
+                                    return 'email is empty';
+                                  } else if (!v.contains('@') ||
+                                      !v.contains('.')) {
+                                    return 'email is badly formatted';
+                                  }
+                                },
+                                onSaved: (v) {
+                                  email = v;
+                                },
+                              ),
                             ),
-                            validator: (v) {
-                              if (v!.trim().isEmpty) {
-                                return 'email is empty';
-                              } else if (!v.contains('@') || !v.contains('.')) {
-                                return 'email is badly formatted';
-                              }
-                            },
-                            onSaved: (v) {
-                              email = v;
-                            },
                           ),
-                        ),
-                      ),
-                    if (!isLogin)
-                      Container(
-                        key: const  Key('phone'),
-                        width: deviceWidth * .8,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const  Color.fromARGB(125, 0, 128, 32)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 2, horizontal: 15),
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            decoration:  const InputDecoration(
-                              hintText: 'phone',
+                        if (!isLogin)
+                          Container(
+                            key: const Key('phone'),
+                            width: deviceWidth * .8,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: const Color.fromARGB(125, 0, 128, 32)),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 2, horizontal: 15),
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: const InputDecoration(
+                                  hintText: 'phone',
+                                ),
+                                validator: (v) {
+                                  if (v!.trim().isEmpty) {
+                                    return 'phone cannot be empty';
+                                  } else if (v.length != 10) {
+                                    return 'enter valid phone number';
+                                  }
+                                },
+                                onSaved: (v) {
+                                  phone = v;
+                                },
+                              ),
                             ),
-                            validator: (v) {
-                              if (v!.trim().isEmpty) {
-                                return 'phone cannot be empty';
-                              } else if (v.length != 10) {
-                                return 'enter valid phone number';
-                              }
-                            },
-                            onSaved: (v) {
-                              phone = v;
-                            },
+                          ),
+                        Container(
+                          width: deviceWidth * .8,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: const Color.fromARGB(125, 0, 128, 32)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 15),
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                hintText: 'usrename',
+                              ),
+                              validator: (v) {
+                                if (v!.trim().isEmpty) {
+                                  return 'username cannot be empty';
+                                }
+                              },
+                              onSaved: (v) {
+                                username = v;
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    Container(
-                      width: deviceWidth * .8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color:  const Color.fromARGB(125, 0, 128, 32)),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 2, horizontal: 15),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'usrename',
+                        Container(
+                          key: const Key('pass'),
+                          width: deviceWidth * .8,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: const Color.fromARGB(125, 0, 128, 32)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 15),
+                            child: TextFormField(
+                              obscureText: true,
+                              decoration: const InputDecoration(
+                                hintText: 'password',
+                              ),
+                              validator: (v) {
+                                if (v!.trim().isEmpty) {
+                                  return 'enter password';
+                                } else if (v.trim().length < 8) {
+                                  return 'password too short';
+                                }
+                              },
+                              onSaved: (v) {
+                                password = v;
+                              },
+                            ),
                           ),
-                          validator: (v) {
-                            if (v!.trim().isEmpty) {
-                              return 'username cannot be empty';
-                            }
-                          },
-                          onSaved: (v) {
-                            username = v;
-                          },
                         ),
-                      ),
+                      ],
                     ),
-                    Container(
-                      key: const  Key('pass'),
-                      width: deviceWidth * .8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color:  const Color.fromARGB(125, 0, 128, 32)),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 2, horizontal: 15),
-                        child: TextFormField(
-                          obscureText: true,
-                          decoration: const  InputDecoration(
-                            hintText: 'password',
+                  ),
+                  isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : TextButton(
+                          onPressed: () {
+                            FocusScope.of(context).unfocus();
+                            trySubmit();
+                          },
+                          child: Text(
+                            isLogin ? 'Login' : 'Signup',
+                            style: const TextStyle(
+                                fontSize: 30, color: Colors.green),
                           ),
-                          validator: (v) {
-                            if (v!.trim().isEmpty) {
-                              return 'enter password';
-                            } else if (v.trim().length < 8) {
-                              return 'password too short';
-                            }
-                          },
-                          onSaved: (v) {
-                            password = v;
-                          },
                         ),
-                      ),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isLogin = !isLogin;
+                      });
+                    },
+                    child: Text(
+                      isLogin ? 'signup instead' : 'login instead',
+                      style:
+                          const TextStyle(color: Color.fromARGB(255, 0, 97, 3)),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
               ),
-              isLoading
-                  ? const  Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : TextButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        trySubmit();
-                      },
-                      child: Text(
-                        isLogin ? 'Login' : 'Signup',
-                        style:  const TextStyle(fontSize: 30, color: Colors.green),
-                      ),
-                    ),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    isLogin = !isLogin;
-                  });
-                },
-                child: Text(
-                  isLogin ? 'signup instead' : 'login instead',
-                  style:  const TextStyle(color: Color.fromARGB(255, 0, 97, 3)),
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-            ],
+            ),
           ),
         ),
       ),

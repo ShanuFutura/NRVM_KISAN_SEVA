@@ -31,49 +31,59 @@ class FarmersDrawer extends StatelessWidget {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(Icons.thermostat),
-                              label: Text(
-                                  '${Provider.of<HttpProviders>(context).temp.toInt()}°C')),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(Icons.water_drop),
-                              label: Text(
-                                  '${Provider.of<HttpProviders>(context).humidity.toInt()}%')),
-                        ],
-                      ),
-                      Expanded(child: Container()),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              Provider.of<HttpProviders>(context).weatherStatus,
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontWeight: FontWeight.bold),
+                  child: StreamBuilder(
+                    stream: Stream.periodic(Duration(seconds: 1)),
+                    builder: ((context, snapshot) {
+                      Provider.of<HttpProviders>(context).getSensorData();
+                      return Builder(builder: (context) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            // Text(DateTime.now().toString()),
+                            Row(
+                              children: [
+                                TextButton.icon(
+                                    onPressed: () {},
+                                    icon: const Icon(Icons.thermostat),
+                                    label: Text(
+                                        '${Provider.of<HttpProviders>(context).temp.toInt()}°C')),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            Row(
+                              children: [
+                                TextButton.icon(
+                                    onPressed: () {},
+                                    icon: const Icon(Icons.water_drop),
+                                    label: Text(
+                                        '${Provider.of<HttpProviders>(context).humidity.toInt()}%')),
+                              ],
+                            ),
+                            Expanded(child: Container()),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    Provider.of<HttpProviders>(context)
+                                        .weatherStatus,
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      });
+                    }),
                   ),
                 ),
               ),
             ),
             const Divider(),
             // ListTile(
-            //   title: const Text('Profile edit'), 
+            //   title: const Text('Profile edit'),
             //   trailing: const Icon(Icons.account_circle),
             //   onTap: () {
             //     Navigator.of(context).pop();

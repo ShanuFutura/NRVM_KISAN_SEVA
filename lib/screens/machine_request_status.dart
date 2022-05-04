@@ -19,9 +19,13 @@ class MachineRequestStatus extends StatelessWidget {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else {
-              // List machines = Provider.of<HttpProviders>(context).machinesList;
-
+            } else if ((snap.data as List)[0]['message'] == 'Failed to View') {
+              return Center(
+                child: Text('no machine requests yet'),
+              );
+            }
+            // List machines = Provider.of<HttpProviders>(context).machinesList;
+            else {
               return ListView.builder(
                   itemCount: (snap.data as List).length,
                   itemBuilder: (context, index) {
