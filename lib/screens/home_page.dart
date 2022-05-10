@@ -6,6 +6,7 @@ import 'package:farmers_app/screens/faq_list.dart';
 import 'package:farmers_app/screens/machinary_list_screen.dart';
 import 'package:farmers_app/screens/pesticides_and_fertilizers_list.dart';
 import 'package:farmers_app/widgets/farmers_drawer.dart';
+import 'package:farmers_app/widgets/m_l_cam.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,7 @@ class HomePage extends StatelessWidget {
       drawer: FarmersDrawer(),
       appBar: AppBar(
         title: const Text('Farmers App'),
-        actions: [
+        actions: [MLCam(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(

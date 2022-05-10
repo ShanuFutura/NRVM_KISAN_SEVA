@@ -16,8 +16,16 @@ import 'package:farmers_app/screens/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tflite/tflite.dart';
 
-void main() => runApp(MainClass());
+
+  void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  print(await Tflite.loadModel(
+    model: 'assets/MLKit/plant_disease_model.tflite',
+    labels: 'assets/MLKit/plant_labels.txt',
+  ));
+  runApp(MainClass());}
 
 class MainClass extends StatelessWidget {
   const MainClass({Key? key}) : super(key: key);
