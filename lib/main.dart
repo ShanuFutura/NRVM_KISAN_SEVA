@@ -56,6 +56,7 @@ class MainClass extends StatelessWidget {
 
                 return const HomePage();
               } else {
+                // return const HomePage();
                 return Registration();
               }
             } else {

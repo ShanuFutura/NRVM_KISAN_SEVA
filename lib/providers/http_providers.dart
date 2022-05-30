@@ -40,6 +40,7 @@ class HttpProviders extends ChangeNotifier {
     String username,
     String password,
   ) async {
+    print('name: $name, email: $email,mobile: $mobile, username:$username, password:$password');
     Response res;
     try {
       res = await post(Uri.parse(Dummies.rootUrl + 'register.php'), body: {

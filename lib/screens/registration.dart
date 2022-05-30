@@ -26,38 +26,13 @@ class _RegistrationState extends State<Registration> {
 
   trySubmit() async {
     if (fkey.currentState!.validate()) {
-      setState(() {
-        isLoading = true;
-      });
       fkey.currentState!.save();
-      var succeed;
-      if (isLogin) {
-        // print('passing: ' + username + password);
-        succeed = await Provider.of<HttpProviders>(context, listen: false)
-            .farmerLogin(username, password);
-        setState(() {
-          isLoading = false;
-        });
-      } else {
-        succeed = await Provider.of<HttpProviders>(context, listen: false)
+      if (!isLogin) {
+        Provider.of<HttpProviders>(context, listen: false)
             .farmersRegister(name, email, phone, username, password);
-        setState(() {
-          isLoading = false;
-        });
-      }
-      if (succeed) {
-        final pref = await SharedPreferences.getInstance();
-        pref.setBool('isLogged', true);
-        Navigator.of(context).pushNamed(HomePage.routeName);
       } else {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const AlertDialog(
-                title: Text('Couldn\'t login'),
-                content: Text('Something went wrong'),
-              );
-            });
+        Provider.of<HttpProviders>(context, listen: false)
+            .farmerLogin(username, password);
       }
     }
   }
